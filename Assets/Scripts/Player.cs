@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private ControllableObject controls;
+    private PlayerControls controls;
     public float walkSpeed = 5.0f;
     private Rigidbody2D myRigidbody;
     private float falltimer;
@@ -15,13 +15,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        controls = gameObject.GetComponent<ControllableObject>();
+        controls = gameObject.GetComponent<PlayerControls>();
         myRigidbody = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
-        controls.Movement(myRigidbody);
         transform.rotation = Quaternion.identity; //Stop player rotating
     }
 
