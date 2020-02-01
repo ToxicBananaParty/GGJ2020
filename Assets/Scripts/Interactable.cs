@@ -21,7 +21,7 @@ public class Interactable: MonoBehaviour {
 		}
 	}
 
-	protected void performAction() {
+	public void performAction() {
 		// open for implementation
 	}
 
