@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
     type: 3}
-  actIconOffset: {x: 0, y: 0.8, z: 0}
+  actIconOffset: {x: 0, y: 2.5, z: 0}
 --- !u!212 &782761117
 SpriteRenderer:
   m_ObjectHideFlags: 0

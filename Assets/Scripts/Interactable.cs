@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Interactable: MonoBehaviour {
 	public GameObject actIconPrefab;
-	public Vector3 actIconOffset = new Vector3(0, 0.8f, 0);
+    public Vector3 actIconOffset;
 
 	private GameObject actIcon;
 	private List<Interactor> interactors = new List<Interactor>();
 
 	// Start is called before the first frame update
 	void Start() {
-		//
-	}
+    }
 
 	// Update is called once per frame
 	void Update() {
 		if(actIcon != null) {
-			actIcon.transform.position = transform.position + actIconOffset;
+		    actIcon.transform.position = transform.position + actIconOffset;
 		}
 	}
 
@@ -40,8 +39,11 @@ public class Interactable: MonoBehaviour {
 	}
 
 	private void setActIconVisible(bool visible) {
-		if(actIcon == null) {
-			actIcon = Instantiate(actIconPrefab) as GameObject;
+		if(actIcon == null)
+		{
+            Debug.Log("Changing!");
+            actIcon = Instantiate(actIconPrefab);
+		    actIcon.transform.position = transform.position + actIconOffset;
             actIcon.transform.localScale *= 5;
         }
 		actIcon.SetActive(visible);
