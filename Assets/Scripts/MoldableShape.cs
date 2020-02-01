@@ -45,7 +45,6 @@ public class MoldableShape: MonoBehaviour {
 					}
 					// update sprite
 					int fillEndX = width - (int)insetAmount;
-					int fillStartY = 0;
 					for (int x=(int)insetAmount; x<fillEndX; x++) {
 						for(int y=0; y<(int)fillHeight; y++) {
 							int i = (y * width) + x;
@@ -55,11 +54,13 @@ public class MoldableShape: MonoBehaviour {
 					
 					// update polygon collider
 					points = new Vector2[4];
-					float xExtrude = ((shapeWidth - insetAmount) / 2.0f) / pixelsPerUnit;
-					points[0] = new Vector2(-xExtrude, -(((height / 2.0f) - fillStartY) / pixelsPerUnit));
-					points[1] = new Vector2(xExtrude, -(((height / 2.0f) - fillStartY) / pixelsPerUnit));
-					points[2] = new Vector2(xExtrude, ((height / 2.0f) / pixelsPerUnit));
-					points[3] = new Vector2(-xExtrude, ((height / 2.0f) / pixelsPerUnit));
+					float xExtrude = (shapeWidth / 2.0f) / pixelsPerUnit;
+					float yTop = -(((float)height / 2.0f) - fillHeight) / pixelsPerUnit;
+					float yBottom = -((float)height / 2.0f) / pixelsPerUnit;
+					points[0] = new Vector2(-xExtrude, yTop);
+					points[1] = new Vector2(xExtrude, yTop);
+					points[2] = new Vector2(xExtrude, yBottom);
+					points[3] = new Vector2(-xExtrude, yBottom);
 				}
 				break;
 			default:
