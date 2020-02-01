@@ -16,45 +16,17 @@ public class Player : MonoBehaviour
     void Start()
     {
         myRigidbody = gameObject.GetComponent<Rigidbody2D>();
-        switch (GameObject.Find("Players").transform.childCount)
-        {
-            case 1:
-                left = KeyCode.A;
-                right = KeyCode.D;
-                up = KeyCode.W;
-                down = KeyCode.S;
-                jump = KeyCode.Space;
-                break;
-            case 2:
-                left = KeyCode.LeftArrow;
-                right = KeyCode.RightArrow;
-                up = KeyCode.UpArrow;
-                down = KeyCode.DownArrow;
-                jump = KeyCode.RightControl;
-                break;
-            case 3:
-                left = KeyCode.Keypad4;
-                right = KeyCode.Keypad6;
-                up = KeyCode.Keypad8;
-                down = KeyCode.Keypad2;
-                jump = KeyCode.Keypad5;
-                break;
-            case 4:
-                left = KeyCode.J;
-                right = KeyCode.L;
-                up = KeyCode.I;
-                down = KeyCode.K;
-                jump = KeyCode.O;
-                break;
-            default:
-                Debug.Log("Uh oh!");
-                break;
-
-        }
+        Debug.Log(GameObject.Find("Players").transform.childCount);
+        
     }
 
     void FixedUpdate()
     {
+        left = KeyCode.A;
+        right = KeyCode.D;
+        up = KeyCode.W;
+        down = KeyCode.S;
+        jump = KeyCode.Space;
         Movement();
         transform.rotation = Quaternion.identity; //Stop player rotating
     }
@@ -98,7 +70,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.identity;
         }
 
-        if (!Input.anyKey)
+        if(!Input.GetKey(down) && !Input.GetKey(right) && !Input.GetKey(left))
         {
             myRigidbody.velocity = new Vector2(0.0f, myRigidbody.velocity.y);
             transform.rotation = Quaternion.identity;

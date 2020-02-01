@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
         if (GameObject.Find("Players").transform.childCount < 4)
         {
             Debug.Log("Spawning player!");
-            Instantiate(playerPrefab, GameObject.Find("Players").transform);
+            GameObject newPlayer = Instantiate(playerPrefab, GameObject.Find("Players").transform);
+            newPlayer.transform.localScale = newPlayer.transform.localScale * 25;
         }
     }
 
