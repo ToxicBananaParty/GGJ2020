@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public float timer = 0.0f;
     public float cash = 0.0f;
+    public float inspectionChance = 0.0f;
     public Text timerText;
     public Text cashText;
     public GameObject player;
@@ -44,7 +45,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Spawning player!");
             GameObject newPlayer = Instantiate(playerPrefab, GameObject.Find("Players").transform);
-            newPlayer.transform.localScale = newPlayer.transform.localScale * 25;
         }
     }
 
