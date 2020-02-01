@@ -10,9 +10,14 @@ public enum MoldableShapeType {
 }
 
 public class MoldableShape: MonoBehaviour {
-	public float fillAmount = 256*100;
+	public float fillAmount = 0;
 	public float shapeCompress = 0.5f;
 	public MoldableShapeType shapeType = MoldableShapeType.RECTANGLE;
+
+	private static float circleMaxRadius = 128.0f;
+	private static float circleMaxFillAmount {
+		get { return (float)(Math.PI * (double)circleMaxRadius * (double)circleMaxRadius); }
+	}
 
 	private static int indexForPoint(int x, int y, int width) {
 		return (y * width) + x;
@@ -67,11 +72,12 @@ public class MoldableShape: MonoBehaviour {
 				}
 				break;
 			case MoldableShapeType.CIRCLE: {
-					float minRadius = 10.0f;
-					float maxRadius = 128.0f;
+					float radius = (float)Math.Sqrt((double)fillAmount / Math.PI);
+					if(radius > circleMaxRadius) {
+						radius = circleMaxRadius;
+					}
 					int cx = (width / 2);
 					int cy = (height / 2);
-					float radius = minRadius + ((maxRadius - minRadius) * (1.0f - shapeCompress));
 					int radiusInt = (int)radius;
 					for(int x=0; x<radiusInt; x++) {
 						int d = (int)Mathf.Ceil(Mathf.Sqrt(radiusInt * radiusInt - x * x));
