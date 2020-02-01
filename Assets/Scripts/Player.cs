@@ -20,6 +20,20 @@ public class Player : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         myRigidbody.velocity = new Vector2(moveHorizontal * walkSpeed, myRigidbody.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.S)) //Fall thru platform
+        {
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f);
+        }
+        if (Input.GetKey(KeyCode.S)) //Move down platform
+        {
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.S)) //Stop falling thru platform
+        {
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
         #endregion
     }
 
@@ -32,12 +46,10 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.W)) //Move Up ladder
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 4.0f);
-            }
-            else if (Input.GetKey(KeyCode.S)) //Move down ladder
-            {
-                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f);
+                gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             }
         }
+
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -45,6 +57,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ladder"))
         {
             myRigidbody.velocity = Vector2.zero;
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 }
