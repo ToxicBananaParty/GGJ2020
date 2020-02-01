@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StationInteraction : Interactable
 {
+    private bool attached = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +19,10 @@ public class StationInteraction : Interactable
         
     }
 
-    private bool attached = false;
-    public override void performAction()
+    public override void performAction(Interactor interactor)
     {
-        if (!attached)
-        {
+
+        if (!attached) {
             foreach (Transform child in GameObject.Find("Players").transform)
             {
                 child.gameObject.GetComponent<PlayerControls>().stationControls =

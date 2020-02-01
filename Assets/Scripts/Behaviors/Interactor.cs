@@ -36,7 +36,7 @@ public class Interactor: MonoBehaviour {
 			return false;
 		}
 		var interactable = interactables[0];
-		interactable.performAction();
+		interactable.performAction(this);
 		return true;
 	}
 }
