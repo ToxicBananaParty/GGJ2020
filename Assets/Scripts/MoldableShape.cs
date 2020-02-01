@@ -13,6 +13,10 @@ public class MoldableShape: MonoBehaviour {
 	public float fillAmount = 256*100;
 	public float shapeCompress = 0.5f;
 	public MoldableShapeType shapeType = MoldableShapeType.RECTANGLE;
+
+	private static int indexForPoint(int x, int y, int width) {
+		return (y * width) + x;
+	}
     
 	// Start is called before the first frame update
 	void Start() {
@@ -52,7 +56,6 @@ public class MoldableShape: MonoBehaviour {
 						}
 					}
 					
-					// update polygon collider
 					points = new Vector2[4];
 					float xExtrude = (shapeWidth / 2.0f) / pixelsPerUnit;
 					float yTop = -(((float)height / 2.0f) - fillHeight) / pixelsPerUnit;
@@ -61,6 +64,36 @@ public class MoldableShape: MonoBehaviour {
 					points[1] = new Vector2(xExtrude, yTop);
 					points[2] = new Vector2(xExtrude, yBottom);
 					points[3] = new Vector2(-xExtrude, yBottom);
+				}
+				break;
+			case MoldableShapeType.CIRCLE: {
+					float minRadius = 10.0f;
+					float maxRadius = 128.0f;
+					int cx = (width / 2);
+					int cy = (height / 2);
+					float radius = minRadius + ((maxRadius - minRadius) * (1.0f - shapeCompress));
+					int radiusInt = (int)radius;
+					for(int x=0; x<radiusInt; x++) {
+						int d = (int)Mathf.Ceil(Mathf.Sqrt(radiusInt * radiusInt - x * x));
+						for (int y=0; y<d; y++) {
+							int px = cx + x;
+							int nx = cx - x;
+							int py = cy + y;
+							int ny = cy - y;
+
+							pixels[indexForPoint(px, py, width)] = Color.black;
+							pixels[indexForPoint(nx, py, width)] = Color.black;
+							pixels[indexForPoint(px, ny, width)] = Color.black;
+							pixels[indexForPoint(nx, ny, width)] = Color.black;
+						}
+					}
+
+					points = new Vector2[4];
+					float halfRadius = (radius / 2.0f) / pixelsPerUnit;
+					points[0] = new Vector2(-halfRadius, -halfRadius);
+					points[1] = new Vector2(halfRadius, -halfRadius);
+					points[2] = new Vector2(halfRadius, halfRadius);
+					points[3] = new Vector2(-halfRadius, halfRadius);
 				}
 				break;
 			default:
