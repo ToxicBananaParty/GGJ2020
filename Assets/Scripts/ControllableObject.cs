@@ -25,13 +25,13 @@ public class ControllableObject : MonoBehaviour
         falltimer += Time.deltaTime * 12.5f;
         if (Input.GetKey(left))
         {
-            moveHorizontal = -1.5f;
+            moveHorizontal = -2.0f;
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
 
         if (Input.GetKey(right))
         {
-            moveHorizontal = 1.5f;
+            moveHorizontal = 2.0f;
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
@@ -60,7 +60,7 @@ public class ControllableObject : MonoBehaviour
         //Debug.Log("Colliding!");
         if (Input.GetKey(up)) //Move Up ladder
         {
-            myRigidbody.velocity = new Vector2(0.0f, 4.0f);
+            myRigidbody.velocity = new Vector2(0.0f, 7.0f);
             gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
             transform.rotation = Quaternion.identity;
         }
