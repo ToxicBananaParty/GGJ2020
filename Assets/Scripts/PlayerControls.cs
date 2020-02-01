@@ -7,6 +7,7 @@ public class PlayerControls : MonoBehaviour
     public StationControls stationControls;
     public KeyCode up, down, left, right, jump;
 
+    private Interactor interactor;
     void Start()
     {
         left = KeyCode.A;
@@ -15,6 +16,7 @@ public class PlayerControls : MonoBehaviour
         down = KeyCode.S;
         jump = KeyCode.Space;
         stationControls = null;
+        interactor = GetComponent<Interactor>();
     }
 
     void FixedUpdate()
@@ -27,16 +29,6 @@ public class PlayerControls : MonoBehaviour
         {
             //Do station controls
         }
-    }
-
-    void AttachToStation()
-    {
-
-    }
-
-    void DetachFromStation()
-    {
-
     }
 
 
@@ -78,6 +70,11 @@ public class PlayerControls : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(0.0f, myRigidbody.velocity.y);
             transform.rotation = Quaternion.identity;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            interactor.interact();
         }
     }
 

@@ -21,7 +21,7 @@ public class Interactable: MonoBehaviour {
 		}
 	}
 
-	public void performAction() {
+	public virtual void performAction() {
 		// open for implementation
 	}
 
@@ -42,7 +42,8 @@ public class Interactable: MonoBehaviour {
 	private void setActIconVisible(bool visible) {
 		if(actIcon == null) {
 			actIcon = Instantiate(actIconPrefab) as GameObject;
-		}
+            actIcon.transform.localScale *= 5;
+        }
 		actIcon.SetActive(visible);
 	}
 }
