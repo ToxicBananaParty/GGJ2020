@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Magnet: MonoBehaviour {
 	private List<GameObject> stuckObjects = new List<GameObject>();
-	public float attractionStrength = 60.0f;
+	public float attractionStrength = 200.0f;
 	public bool active = true;
 
 	// Start is called before the first frame update

@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e260bde9dcaf462aa5bf13c3f700469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractionStrength: 100
+  attractionStrength: 200
   active: 1
 --- !u!1 &5301676909820397811
 GameObject:

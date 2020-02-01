@@ -42,6 +42,6 @@ public class ExpandableRod: MonoBehaviour {
 			newRodLength = maxRodLength;
 		}
 		setRodLength(newRodLength);
-		return rodLength - oldRodLength;
+		return oldRodLength - rodLength;
 	}
 }
