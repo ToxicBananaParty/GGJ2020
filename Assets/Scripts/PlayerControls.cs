@@ -9,7 +9,7 @@ public class PlayerControls : MonoBehaviour
     public KeyCode up, down, left, right, jump;
 
     private bool climbingLadder = false;
-
+    private Rigidbody2D rigidBody;
     void Start()
     {
         left = KeyCode.A;
@@ -20,7 +20,17 @@ public class PlayerControls : MonoBehaviour
         stationControls = null;
 		if(player == null) {
             player = GetComponent<Player>();
-		}
+            rigidBody = player.GetComponent<Rigidbody2D>();
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(jump) && !climbingLadder)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, player.jumpVelocity);
+            transform.rotation = Quaternion.identity;
+        }
     }
 
     void FixedUpdate()
@@ -49,7 +59,6 @@ public class PlayerControls : MonoBehaviour
 
 	public void Movement()
     {
-        var rigidBody = player.GetComponent<Rigidbody2D>();
         if (Input.GetKey(left)) {
             player.transform.position += new Vector3(-player.walkSpeed, 0, 0);
             player.GetComponent<SpriteRenderer>().flipX = false;
@@ -71,12 +80,11 @@ public class PlayerControls : MonoBehaviour
             var magnetic = player.GetComponent<Magnetic>();
             if (climbingLadder && (magnetic == null || !magnetic.isStuckToMagnet())) {
                 rigidBody.velocity = new Vector2(0.0f, 0.0f);
+                transform.rotation = Quaternion.identity;
             }
         } else {
             climbingLadder = false;
-            if (Input.GetKeyDown(jump)) {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, player.jumpVelocity);
-            }
         }
+        transform.rotation = Quaternion.identity;
     }
 }

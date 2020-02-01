@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Bottom"))
         {
-            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         ladders.Remove(other.gameObject);
         var rigidBody = GetComponent<Rigidbody2D>();
         if (other.gameObject.CompareTag("Platform") && rigidBody.velocity.y < -2.0f) {
-            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Platform"))
         {
-            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 }
