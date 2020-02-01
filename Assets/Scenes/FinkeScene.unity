@@ -2047,6 +2047,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Magnet Arm
       objectReference: {fileID: 0}
+    - target: {fileID: 2501967862038253886, guid: 91913a8c062084e5e8eec5c9367bfd56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501967863064088810, guid: 91913a8c062084e5e8eec5c9367bfd56,
+        type: 3}
+      propertyPath: attractionStrength
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501967863064088811, guid: 91913a8c062084e5e8eec5c9367bfd56,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91913a8c062084e5e8eec5c9367bfd56, type: 3}
 --- !u!1001 &5819024114428619419

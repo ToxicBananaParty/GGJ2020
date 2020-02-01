@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public float climbSpeed = 0.1f;
-    public float jumpVelocity = 20.0f;
-    public float jumpAmount;
-
     public Player player;
     public StationControls stationControls;
     public KeyCode up, down, left, right, jump;
@@ -35,17 +31,15 @@ public class PlayerControls : MonoBehaviour
             player.GetComponent<Interactor>().interact();
         }
 
-        if (stationControls == null)
-        {
+        if (stationControls == null) {
             Movement();
-            
+
         }
-        else
-        {
+        else {
             //Do station controls
         }
 
-		if(player.canClimbLadder() && climbingLadder) {
+        if (player.canClimbLadder() && climbingLadder) {
             player.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
 		} else {
             player.GetComponent<Rigidbody2D>().gravityScale = player.gravityScale;
@@ -53,7 +47,7 @@ public class PlayerControls : MonoBehaviour
     }
 
 
-    public void Movement()
+	public void Movement()
     {
         var rigidBody = player.GetComponent<Rigidbody2D>();
         if (Input.GetKey(left)) {
@@ -69,10 +63,10 @@ public class PlayerControls : MonoBehaviour
 		if(player.canClimbLadder()) {
             if (Input.GetKey(up)) {
                 climbingLadder = true;
-                player.transform.position += new Vector3(0, climbSpeed, 0);
+                player.transform.position += new Vector3(0, player.climbSpeed, 0);
             }
 			if(Input.GetKey(down)) {
-                player.transform.position += new Vector3(0, -climbSpeed, 0);
+                player.transform.position += new Vector3(0, -player.climbSpeed, 0);
             }
             var magnetic = player.GetComponent<Magnetic>();
             if (climbingLadder && (magnetic == null || !magnetic.isStuckToMagnet())) {
@@ -81,7 +75,7 @@ public class PlayerControls : MonoBehaviour
         } else {
             climbingLadder = false;
             if (Input.GetKeyDown(jump)) {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpVelocity);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, player.jumpVelocity);
             }
         }
     }

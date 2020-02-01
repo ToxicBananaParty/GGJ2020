@@ -6,7 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerControls controls;
-    public float walkSpeed = 0.2f;
+    public float walkSpeed = 0.1f;
+    public float climbSpeed = 0.1f;
+    public float jumpVelocity = 20.0f;
     public float gravityScale = 10.0f;
     private List<GameObject> ladders = new List<GameObject>();
 

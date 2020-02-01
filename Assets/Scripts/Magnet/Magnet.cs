@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Magnet: MonoBehaviour {
 	private List<GameObject> stuckObjects = new List<GameObject>();
-	public float attractionStrength = 100.0f;
+	public float attractionStrength = 60.0f;
 	public bool active = true;
 
 	// Start is called before the first frame update
@@ -13,11 +13,13 @@ public class Magnet: MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		foreach(var stuckObject in stuckObjects) {
-			var direction = (transform.position - stuckObject.transform.position).normalized;
+		var circleCollider = GetComponent<CircleCollider2D>();
+		var circleCenter = transform.position - new Vector3(circleCollider.offset.x, circleCollider.offset.y, 0);
+		foreach (var stuckObject in stuckObjects) {
+			var direction = (circleCenter - stuckObject.transform.position).normalized;
 			direction.z = 0;
 			var force = direction * attractionStrength;
-			stuckObject.GetComponent<Rigidbody2D>().AddRelativeForce(force);
+			stuckObject.GetComponent<Rigidbody2D>().AddForceAtPosition(circleCenter, -force);
 		}
 	}
 
