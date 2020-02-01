@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         //Ladder Collision
         if (other.gameObject.CompareTag("Ladder"))
         {
-            Debug.Log("Colliding!");
+            //Debug.Log("Colliding!");
             if (Input.GetKey(KeyCode.W)) //Move Up ladder
             {
                 myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 4.0f);
