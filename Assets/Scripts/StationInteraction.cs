@@ -26,7 +26,7 @@ public class StationInteraction : Interactable
             {
                 child.gameObject.GetComponent<PlayerControls>().stationControls =
                     gameObject.GetComponent<StationControls>();
-                child.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                child.gameObject.GetComponent<Rigidbody2D>().Sleep();
             }
 
             attached = true;
@@ -36,7 +36,9 @@ public class StationInteraction : Interactable
             foreach (Transform child in GameObject.Find("Players").transform)
             {
                 child.gameObject.GetComponent<PlayerControls>().stationControls = null;
+                child.gameObject.GetComponent<Rigidbody2D>().WakeUp();
             }
+            attached = false;
         }
     }
 }
