@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public float walkSpeed = 5.0f;
     private Rigidbody2D myRigidbody;
+    private float falltimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,20 +17,33 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        #region Player Movement
+        Movement();
+    }
 
+    void Movement()
+    {
+
+        //Jumping
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y + 5.0f);
+        }
+        falltimer += Time.deltaTime * 12.5f;
+        #region Player Movement
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         if (!Input.GetKey(KeyCode.S))
         {
+            falltimer = 0;
             myRigidbody.velocity = new Vector2(moveHorizontal * walkSpeed, myRigidbody.velocity.y);
         }
         else if (transform.position.y > 0.0f && Input.GetKey(KeyCode.S))
         {
-            Debug.Log("Turning on trigger!");
+            Debug.Log("Timer: " + falltimer);
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f);
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f - falltimer);
         }
+
         #endregion
     }
 
@@ -44,7 +59,6 @@ public class Player : MonoBehaviour
                 gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             }
         }
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
