@@ -4,9 +4,10 @@ using System.Collections;
 public class MagnetArm: MonoBehaviour {
 	public ExpandableRod expandableRod;
 	public GameObject magnetPivot;
-	public float verticalMoveSpeed = 0.01f;
-	public float horizontalMoveSpeed = 0.01f;
-	public float rotationSpeed = 0.2f;
+	public Magnet magnet;
+	public float verticalMoveSpeed = 0.05f;
+	public float horizontalMoveSpeed = 0.05f;
+	public float rotationSpeed = 0.5f;
 
 	// Use this for initialization
 	void Start() {
@@ -18,21 +19,33 @@ public class MagnetArm: MonoBehaviour {
 		//
 	}
 
-	void moveDown() {
-		expandableRod.expandRod(verticalMoveSpeed);
+	public void moveDown() {
+		float moveAmount = expandableRod.expandRod(verticalMoveSpeed);
+		magnet.shiftStuckObjects(new Vector3(0, moveAmount, 0));
 	}
 
-	void moveUp() {
-		expandableRod.expandRod(-verticalMoveSpeed);
+	public void moveUp() {
+		float moveAmount = expandableRod.expandRod(-verticalMoveSpeed);
+		magnet.shiftStuckObjects(new Vector3(0, moveAmount, 0));
 	}
 
-	void rotateLeft() {
+	public void moveLeft() {
+		transform.position = transform.position + new Vector3(-horizontalMoveSpeed, 0, 0);
+		magnet.shiftStuckObjects(new Vector3(-horizontalMoveSpeed, 0, 0));
+	}
+
+	public void moveRight() {
+		transform.position = transform.position + new Vector3(horizontalMoveSpeed, 0, 0);
+		magnet.shiftStuckObjects(new Vector3(horizontalMoveSpeed, 0, 0));
+	}
+
+	public void rotateLeft() {
 		var rotation = magnetPivot.transform.localRotation;
 		rotation.z = rotation.z - rotationSpeed;
 		magnetPivot.transform.localRotation = rotation;
 	}
 
-	void rotateRight() {
+	public void rotateRight() {
 		var rotation = magnetPivot.transform.localRotation;
 		rotation.z = rotation.z + rotationSpeed;
 		magnetPivot.transform.localRotation = rotation;
