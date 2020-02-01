@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactable: MonoBehaviour {
 	public GameObject actIconPrefab;
-	public Vector3 actIconOffset = new Vector3(0, -0.8f, 0);
+	public Vector3 actIconOffset = new Vector3(0, 0.8f, 0);
 
 	private GameObject actIcon;
 	private List<Interactor> interactors = new List<Interactor>();
