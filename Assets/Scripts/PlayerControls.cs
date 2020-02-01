@@ -21,6 +21,11 @@ public class PlayerControls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            interactor.interact();
+        }
+
         if (stationControls == null)
         {
             Movement(gameObject.GetComponent<Rigidbody2D>());
@@ -70,11 +75,6 @@ public class PlayerControls : MonoBehaviour
         {
             myRigidbody.velocity = new Vector2(0.0f, myRigidbody.velocity.y);
             transform.rotation = Quaternion.identity;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            interactor.interact();
         }
     }
 
