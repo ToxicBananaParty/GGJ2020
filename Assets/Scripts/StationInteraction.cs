@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class StationInteraction : Interactable
 {
-    private bool attached = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,26 +17,15 @@ public class StationInteraction : Interactable
         
     }
 
-    public override void performAction(Interactor interactor)
-    {
-        if (!attached) {
-            foreach (Transform child in GameObject.Find("Players").transform)
-            {
-                child.gameObject.GetComponent<PlayerControls>().stationControls =
-                    gameObject.GetComponent<StationControls>();
-                child.gameObject.GetComponent<Rigidbody2D>().Sleep();
-            }
+	public override bool canInteract(Interactor interactor) {
+        var player = interactor.GetComponent<Player>();
+        var stationControls = GetComponent<StationControls>();
+        return (player != null) && (stationControls != null) && (player.controls.stationControls == null);
+	}
 
-            attached = true;
-        }
-        else
-        {
-            foreach (Transform child in GameObject.Find("Players").transform)
-            {
-                child.gameObject.GetComponent<PlayerControls>().stationControls = null;
-                child.gameObject.GetComponent<Rigidbody2D>().WakeUp();
-            }
-            attached = false;
-        }
+	public override void performAction(Interactor interactor) {
+		var player = interactor.GetComponent<Player>();
+        var stationControls = GetComponent<StationControls>();
+        player.controls.attachStation(stationControls);
     }
 }

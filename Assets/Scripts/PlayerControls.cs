@@ -6,34 +6,52 @@ public class PlayerControls : MonoBehaviour
 {
     public Player player;
     public StationControls stationControls;
-    public KeyCode up, down, left, right, jump;
+    public KeyCode left = KeyCode.A;
+    public KeyCode right = KeyCode.D;
+    public KeyCode up = KeyCode.W;
+    public KeyCode down = KeyCode.S;
+    public KeyCode jump = KeyCode.Space;
+    public KeyCode interact = KeyCode.F;
 
     private bool climbingLadder = false;
-    private Rigidbody2D rigidBody;
-    void Start()
-    {
-        left = KeyCode.A;
-        right = KeyCode.D;
-        up = KeyCode.W;
-        down = KeyCode.S;
-        jump = KeyCode.Space;
-        stationControls = null;
+
+    void Start() {
 		if(player == null) {
             player = GetComponent<Player>();
-            rigidBody = player.GetComponent<Rigidbody2D>();
         }
+    }
+
+	public void attachStation(StationControls station) {
+		if(this.stationControls != null && station != this.stationControls) {
+            detachStation(this.stationControls);
+		}
+        this.stationControls = station;
+        station.playerControls = this;
+        var rigidBody = player.GetComponent<Rigidbody2D>();
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.Sleep();
+	}
+
+	public void detachStation(StationControls station) {
+		if(station != this.stationControls) {
+            return;
+		}
+        this.stationControls = null;
+        station.playerControls = null;
+        var rigidBody = player.GetComponent<Rigidbody2D>();
+        rigidBody.WakeUp();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(jump) && !climbingLadder)
-        {
+        if (Input.GetKeyDown(jump) && !climbingLadder) {
+            var rigidBody = player.GetComponent<Rigidbody2D>();
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, player.jumpVelocity);
             transform.rotation = Quaternion.identity;
         }
-        
-        if (Input.GetKeyDown(KeyCode.F))
-        {
+		if (stationControls != null) {
+            stationControls.updateControls();
+        } else if (Input.GetKeyDown(interact)) {
             player.GetComponent<Interactor>().interact();
         }
     }
@@ -44,9 +62,6 @@ public class PlayerControls : MonoBehaviour
         if (stationControls == null) {
             Movement();
 
-        }
-        else {
-            //Do station controls
         }
 
         if (player.canClimbLadder() && climbingLadder) {
@@ -79,6 +94,7 @@ public class PlayerControls : MonoBehaviour
             }
             var magnetic = player.GetComponent<Magnetic>();
             if (climbingLadder && (magnetic == null || !magnetic.isStuckToMagnet())) {
+                var rigidBody = player.GetComponent<Rigidbody2D>();
                 rigidBody.velocity = new Vector2(0.0f, 0.0f);
                 transform.rotation = Quaternion.identity;
             }
