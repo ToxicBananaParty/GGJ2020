@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public ControllableObject controls;
+    private ControllableObject controls;
     public float walkSpeed = 5.0f;
     private Rigidbody2D myRigidbody;
     private float falltimer;
