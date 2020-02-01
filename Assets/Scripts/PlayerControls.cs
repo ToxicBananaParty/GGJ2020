@@ -29,12 +29,16 @@ public class PlayerControls : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            player.GetComponent<Interactor>().interact();
+        }
+
         if (stationControls == null)
         {
             Movement();
-            if (Input.GetKeyDown(KeyCode.F)) {
-                player.GetComponent<Interactor>().interact();
-            }
+            
         }
         else
         {
