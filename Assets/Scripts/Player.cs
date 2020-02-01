@@ -19,20 +19,15 @@ public class Player : MonoBehaviour
 
         float moveHorizontal = Input.GetAxis("Horizontal");
 
-        myRigidbody.velocity = new Vector2(moveHorizontal * walkSpeed, myRigidbody.velocity.y);
-
-        if (Input.GetKeyDown(KeyCode.S)) //Fall thru platform
+        if (!Input.GetKey(KeyCode.S))
         {
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f);
+            myRigidbody.velocity = new Vector2(moveHorizontal * walkSpeed, myRigidbody.velocity.y);
         }
-        if (Input.GetKey(KeyCode.S)) //Move down platform
+        else if (transform.position.y > 0.0f && Input.GetKey(KeyCode.S))
         {
+            Debug.Log("Turning on trigger!");
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.S)) //Stop falling thru platform
-        {
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f);
         }
         #endregion
     }
@@ -52,11 +47,35 @@ public class Player : MonoBehaviour
 
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Bottom"))
+        {
+            Debug.Log("Turning off trigger!");
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+    }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ladder"))
         {
             myRigidbody.velocity = Vector2.zero;
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+
+        if (other.gameObject.CompareTag("Platform") && myRigidbody.velocity.y < -2.0f)
+        {
+            Debug.Log("Turning off trigger!");
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        if (coll.gameObject.CompareTag("Platform"))
+        {
+            Debug.Log("Turning off trigger!");
             gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
