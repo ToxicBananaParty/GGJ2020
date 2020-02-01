@@ -51,7 +51,6 @@ public class Interactable: MonoBehaviour {
 
 	private void setActIconVisible(bool visible) {
 		if(actIcon == null) {
-            Debug.Log("Changing!");
             actIcon = Instantiate(actIconPrefab);
 		    actIcon.transform.position = transform.position + actIconOffset;
             actIcon.transform.localScale *= 5;

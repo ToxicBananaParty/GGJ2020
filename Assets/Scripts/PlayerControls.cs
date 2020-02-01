@@ -51,7 +51,8 @@ public class PlayerControls : MonoBehaviour
         }
 		if (stationControls != null) {
             stationControls.updateControls();
-        } else if (Input.GetKeyDown(interact)) {
+        } else if (Input.GetKeyDown(interact))
+        {
             player.GetComponent<Interactor>().interact();
         }
     }

@@ -58,7 +58,7 @@ public class Interactor: MonoBehaviour {
 		Interactable ableInteractable = null;
 		foreach(var interactable in interactables) {
 			if(interactable.canInteract(this)) {
-				ableInteractable = interactable;
+                ableInteractable = interactable;
 				break;
 			}
 		}

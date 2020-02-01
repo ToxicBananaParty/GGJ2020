@@ -365,6 +365,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c45411e355ad92c4e8c962698221c262, type: 3}
+--- !u!1 &129314508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1179148192684965171, guid: 34a697473c3030146a7a0abab8085b3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 851668308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &129314509
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129314508}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e280f3814154be4f83f01a0b9040af3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &155912060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,11 +1128,10 @@ GameObject:
   m_Component:
   - component: {fileID: 829862921}
   - component: {fileID: 829862920}
-  - component: {fileID: 829862919}
   - component: {fileID: 829862918}
   - component: {fileID: 829862923}
-  - component: {fileID: 829862922}
   - component: {fileID: 829862924}
+  - component: {fileID: 829862919}
   m_Layer: 0
   m_Name: Scrap
   m_TagString: Untagged
@@ -1137,7 +1161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 829862917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d502cd7f41ec45859a9436be3f7fb43, type: 3}
+  m_Script: {fileID: 11500000, guid: d723ba4db758a5f4aa944d9d6459de14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
@@ -1207,20 +1231,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &829862922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 829862917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d723ba4db758a5f4aa944d9d6459de14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actIconPrefab: {fileID: 0}
-  actIconOffset: {x: 0, y: 0, z: 0}
 --- !u!58 &829862923
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1251,13 +1261,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.08
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1001 &851668308
 PrefabInstance:
   m_ObjectHideFlags: 0

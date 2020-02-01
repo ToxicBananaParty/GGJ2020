@@ -5,25 +5,37 @@ using UnityEngine;
 public class Carryable : Interactable
 {
     private bool carrying = false;
+    private Interactor theInteractor;
     // Start is called before the first frame update
     void Start()
     {
-        
+
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && carrying)
+        {
+            carrying = false;
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (carrying)
+        {
+            transform.position = theInteractor.transform.position + new Vector3(0.0f, 1.5f, 0.0f);
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
     }
 
     public override void performAction(Interactor interactor)
     {
-        Debug.Log("Carrying");
+        theInteractor = interactor;
         if (!carrying)
         {
             carrying = true;
-            transform.position = interactor.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
             //Pick up
         }
         else
