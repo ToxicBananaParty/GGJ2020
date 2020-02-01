@@ -129,7 +129,7 @@ MonoBehaviour:
   rodBody: {fileID: 5301676909510151782}
   rodAttachment: {fileID: 5301676909820397811}
   initialRodLength: 2
-  minRodLength: 2
+  minRodLength: 0.5
   maxRodLength: 10
 --- !u!1 &5301676909444931959
 GameObject:
@@ -182,7 +182,7 @@ MonoBehaviour:
   magnet: {fileID: 5301676909777160102}
   verticalMoveSpeed: 0.05
   horizontalMoveSpeed: 0.05
-  rotationSpeed: 0.2
+  rotationSpeed: 0.5
 --- !u!114 &5301676909444931958
 MonoBehaviour:
   m_ObjectHideFlags: 0

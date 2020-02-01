@@ -6,7 +6,7 @@ public class ExpandableRod: MonoBehaviour {
 	public GameObject rodBody;
 	public GameObject rodAttachment;
 	public float initialRodLength = 2.0f;
-	public float minRodLength = 2.0f;
+	public float minRodLength = 0.5f;
 	public float maxRodLength = 10.0f;
 	private float rodLength;
 
