@@ -301,6 +301,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5764583576822297006, guid: c45411e355ad92c4e8c962698221c262,
+        type: 3}
+      propertyPath: magnetArm
+      value: 
+      objectReference: {fileID: 1478978557}
     - target: {fileID: 6833401681795197818, guid: c45411e355ad92c4e8c962698221c262,
         type: 3}
       propertyPath: m_Name
@@ -1777,6 +1782,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8086a5a0d082e514aad4c5ec54db8827, type: 3}
+--- !u!114 &1478978557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5301676909444931961, guid: 91913a8c062084e5e8eec5c9367bfd56,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122678970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00bc28c3e0c004f098ce7b2915947216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1624589206
 PrefabInstance:
   m_ObjectHideFlags: 0
