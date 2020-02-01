@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    public float climbSpeed = 0.1f;
+    public float jumpVelocity = 20.0f;
+    public float jumpAmount;
+
+    public Player player;
     public StationControls stationControls;
     public KeyCode up, down, left, right, jump;
 
-    private Interactor interactor;
+    private bool climbingLadder = false;
+
     void Start()
     {
         left = KeyCode.A;
@@ -16,76 +22,62 @@ public class PlayerControls : MonoBehaviour
         down = KeyCode.S;
         jump = KeyCode.Space;
         stationControls = null;
-        interactor = GetComponent<Interactor>();
+		if(player == null) {
+            player = GetComponent<Player>();
+		}
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            interactor.interact();
-        }
-
         if (stationControls == null)
         {
-            Movement(gameObject.GetComponent<Rigidbody2D>());
+            Movement();
+            if (Input.GetKeyDown(KeyCode.F)) {
+                player.GetComponent<Interactor>().interact();
+            }
         }
         else
         {
             //Do station controls
         }
+
+		if(player.canClimbLadder() && climbingLadder) {
+            player.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
+		} else {
+            player.GetComponent<Rigidbody2D>().gravityScale = player.gravityScale;
+		}
     }
 
 
-
-    private float moveHorizontal, falltimer;
-    public void Movement(Rigidbody2D myRigidbody)
+    public void Movement()
     {
-        if (Input.GetKeyDown(jump))
-        {
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y + 5.0f);
+        var rigidBody = player.GetComponent<Rigidbody2D>();
+        if (Input.GetKey(left)) {
+            player.transform.position += new Vector3(-player.walkSpeed, 0, 0);
+            player.GetComponent<SpriteRenderer>().flipX = false;
         }
-        falltimer += Time.deltaTime * 12.5f;
-        if (Input.GetKey(left))
-        {
-            moveHorizontal = -2.0f;
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        }
-
-        if (Input.GetKey(right))
-        {
-            moveHorizontal = 2.0f;
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        if (Input.GetKey(right)) {
+            player.transform.position += new Vector3(player.walkSpeed, 0, 0);
+            player.GetComponent<SpriteRenderer>().flipX = true;
         }
 
-        if (!Input.GetKey(down))
-        {
-            falltimer = 0;
-            myRigidbody.velocity = new Vector2(moveHorizontal * 5.0f, myRigidbody.velocity.y);
-            transform.rotation = Quaternion.identity;
-        }
-        else if (transform.position.y > 0.0f && Input.GetKey(KeyCode.S))
-        {
-            gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f - falltimer);
-            transform.rotation = Quaternion.identity;
-        }
-
-        if (!Input.GetKey(down) && !Input.GetKey(right) && !Input.GetKey(left))
-        {
-            myRigidbody.velocity = new Vector2(0.0f, myRigidbody.velocity.y);
-            transform.rotation = Quaternion.identity;
-        }
-    }
-
-    public void climbLadder(Rigidbody2D myRigidbody)
-    {
-        //Debug.Log("Colliding!");
-        if (Input.GetKey(up)) //Move Up ladder
-        {
-            myRigidbody.velocity = new Vector2(0.0f, 7.0f);
-            gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
-            transform.rotation = Quaternion.identity;
+		// climbing
+		if(player.canClimbLadder()) {
+            if (Input.GetKey(up)) {
+                climbingLadder = true;
+                player.transform.position += new Vector3(0, climbSpeed, 0);
+            }
+			if(Input.GetKey(down)) {
+                player.transform.position += new Vector3(0, -climbSpeed, 0);
+            }
+			if(climbingLadder) {
+                rigidBody.velocity = new Vector2(0.0f, 0.0f);
+            }
+        } else {
+            climbingLadder = false;
+            if (Input.GetKeyDown(jump)) {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpVelocity);
+            }
         }
     }
 }

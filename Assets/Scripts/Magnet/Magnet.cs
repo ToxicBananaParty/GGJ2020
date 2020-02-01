@@ -5,6 +5,7 @@ using UnityEngine;
 public class Magnet: MonoBehaviour {
 	private List<GameObject> stuckObjects = new List<GameObject>();
 	public float attractionStrength = 100.0f;
+	public bool active = true;
 
 	// Start is called before the first frame update
 	void Start() {
@@ -21,15 +22,23 @@ public class Magnet: MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag.Equals("Magnetic") || collision.gameObject.GetComponent<Magnetic>() != null) {
+		var magnetic = collision.gameObject.GetComponent<Magnetic>();
+		if (collision.gameObject.CompareTag("Magnetic") || magnetic != null) {
 			stuckObjects.Add(collision.gameObject);
+			if(magnetic != null) {
+				magnetic.enterMagnetField(this);
+			}
 			Debug.Log("magnet stuck object");
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D collision) {
 		if(stuckObjects.Contains(collision.gameObject)) {
+			var magnetic = collision.gameObject.GetComponent<Magnetic>();
 			stuckObjects.Remove(collision.gameObject);
+			if(magnetic != null) {
+				magnetic.leaveMagnetField(this);
+			}
 			Debug.Log("magnet unstuck object");
 		}
 	}

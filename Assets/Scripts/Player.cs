@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerControls controls;
-    public float walkSpeed = 5.0f;
-    private Rigidbody2D myRigidbody;
-    private float falltimer;
+    public PlayerControls controls;
+    public float walkSpeed = 0.2f;
+    public float gravityScale = 10.0f;
+    private List<GameObject> ladders = new List<GameObject>();
 
 
     //VARIABLES FOR SEPARATE CONTROLS FOR EACH PLAYER
 
     void Start()
     {
-        controls = gameObject.GetComponent<PlayerControls>();
-        myRigidbody = gameObject.GetComponent<Rigidbody2D>();
+		if(controls == null) {
+            controls = gameObject.GetComponent<PlayerControls>();
+        }
+		
     }
 
     void FixedUpdate()
@@ -25,20 +27,20 @@ public class Player : MonoBehaviour
     }
 
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        //Ladder Collision
-        if (other.gameObject.CompareTag("Ladder"))
-        {
-            controls.climbLadder(myRigidbody);
-        }
-    }
+	public bool canClimbLadder()
+	{
+        return ladders.Count > 0;
+	}
 
 
 
     //----This stuff stops the player from falling thru platforms and ladders----
     void OnTriggerEnter2D(Collider2D other)
     {
+        //Ladder Collision
+        if (other.gameObject.CompareTag("Ladder")) {
+            ladders.Add(other.gameObject);
+        }
         if (other.gameObject.CompareTag("Bottom"))
         {
             gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
@@ -47,14 +49,9 @@ public class Player : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ladder"))
-        {
-            myRigidbody.velocity = Vector2.zero;
-            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
-        }
-
-        if (other.gameObject.CompareTag("Platform") && myRigidbody.velocity.y < -2.0f)
-        {
+        ladders.Remove(other.gameObject);
+        var rigidBody = GetComponent<Rigidbody2D>();
+        if (other.gameObject.CompareTag("Platform") && rigidBody.velocity.y < -2.0f) {
             gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
