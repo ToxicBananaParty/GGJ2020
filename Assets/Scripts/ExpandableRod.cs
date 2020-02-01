@@ -32,7 +32,8 @@ public class ExpandableRod: MonoBehaviour {
 		rodLength = length;
 	}
 
-	public void expandRod(float amount) {
+	public float expandRod(float amount) {
+		float oldRodLength = rodLength;
 		float newRodLength = rodLength + amount;
 		if(newRodLength < minRodLength) {
 			newRodLength = minRodLength;
@@ -41,5 +42,6 @@ public class ExpandableRod: MonoBehaviour {
 			newRodLength = maxRodLength;
 		}
 		setRodLength(newRodLength);
+		return rodLength - oldRodLength;
 	}
 }
