@@ -17,12 +17,13 @@ public class Carryable : Interactable
         
     }
 
-    public override void performAction()
+    public override void performAction(Interactor interactor)
     {
+        Debug.Log("Carrying");
         if (!carrying)
         {
             carrying = true;
-            //transform.position = 
+            transform.position = interactor.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
             //Pick up
         }
         else

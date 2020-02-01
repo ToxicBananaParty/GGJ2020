@@ -31,6 +31,26 @@ public class Interactor: MonoBehaviour {
 		}
 	}
 
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        var interactable = coll.gameObject.GetComponent<Interactable>();
+        if (interactable != null)
+        {
+            interactable.endInteractor(this);
+            interactables.Add(interactable);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        var interactable = coll.gameObject.GetComponent<Interactable>();
+        if (interactable != null)
+        {
+            interactable.endInteractor(this);
+            interactables.Remove(interactable);
+        }
+    }
+
 	public Interactable interact() {
 		if(interactables.Count == 0) {
 			return null;

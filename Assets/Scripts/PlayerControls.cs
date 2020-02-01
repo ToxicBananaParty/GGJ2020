@@ -31,15 +31,15 @@ public class PlayerControls : MonoBehaviour
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, player.jumpVelocity);
             transform.rotation = Quaternion.identity;
         }
-    }
-
-    void FixedUpdate()
-    {
-
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             player.GetComponent<Interactor>().interact();
         }
+    }
+
+    void FixedUpdate()
+    {
 
         if (stationControls == null) {
             Movement();
