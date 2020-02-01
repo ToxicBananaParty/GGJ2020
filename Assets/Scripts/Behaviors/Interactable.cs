@@ -20,7 +20,7 @@ public class Interactable: MonoBehaviour {
 		}
 	}
 
-	public virtual void performAction() {
+	public virtual void performAction(Interactor interactor) {
 		// open for implementation
 	}
 
