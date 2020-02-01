@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     //VARIABLES FOR SEPARATE CONTROLS FOR EACH PLAYER
     private KeyCode left, right, up, down, jump;
+
     void Start()
     {
         myRigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -39,6 +40,11 @@ public class Player : MonoBehaviour
                 jump = KeyCode.Keypad5;
                 break;
             case 4:
+                left = KeyCode.J;
+                right = KeyCode.L;
+                up = KeyCode.I;
+                down = KeyCode.K;
+                jump = KeyCode.O;
                 break;
             default:
                 Debug.Log("Uh oh!");
@@ -97,7 +103,7 @@ public class Player : MonoBehaviour
             //Debug.Log("Colliding!");
             if (Input.GetKey(up)) //Move Up ladder
             {
-                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 4.0f);
+                myRigidbody.velocity = new Vector2(0.0f, 4.0f);
                 gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             }
         }
