@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public float moveSpeed = 0.2f;
     public float climbSpeed = 0.1f;
     public float jumpVelocity = 20.0f;
     public float jumpAmount;
@@ -54,11 +53,11 @@ public class PlayerControls : MonoBehaviour
     {
         var rigidBody = player.GetComponent<Rigidbody2D>();
         if (Input.GetKey(left)) {
-            player.transform.position += new Vector3(-moveSpeed, 0, 0);
+            player.transform.position += new Vector3(-player.walkSpeed, 0, 0);
             player.GetComponent<SpriteRenderer>().flipX = false;
         }
         if (Input.GetKey(right)) {
-            player.transform.position += new Vector3(moveSpeed, 0, 0);
+            player.transform.position += new Vector3(player.walkSpeed, 0, 0);
             player.GetComponent<SpriteRenderer>().flipX = true;
         }
 
