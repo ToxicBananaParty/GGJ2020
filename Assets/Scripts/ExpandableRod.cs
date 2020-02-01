@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExpandableRod: MonoBehaviour {
 	public GameObject rodBody;
+	public GameObject rodAttachment;
 	public float initialRodHeight = 2.0f;
 	private float rodHeight;
 
@@ -32,6 +33,9 @@ public class ExpandableRod: MonoBehaviour {
 		spriteSize.y = height;
 		spriteRenderer.size = spriteSize;
 		rodBody.transform.localPosition = new Vector2(0, -height);
+		if(rodAttachment != null) {
+			rodAttachment.transform.position = transform.position + new Vector3(0, -height, 0);
+		}
 		rodHeight = height;
 	}
 }
