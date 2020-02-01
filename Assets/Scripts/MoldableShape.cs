@@ -46,10 +46,6 @@ public class MoldableShape: MonoBehaviour {
 					// update sprite
 					int fillEndX = width - (int)insetAmount;
 					int fillStartY = height - (int)fillHeight;
-					Debug.Log("inset amount = " + insetAmount);
-					Debug.Log("fill height = " + fillHeight);
-					Debug.Log("starting at x=" + insetAmount + " to " + fillEndX);
-					Debug.Log("starting at y=" + fillStartY + " to " + height);
 					for (int x=(int)insetAmount; x<fillEndX; x++) {
 						for(int y=fillStartY; y<height; y++) {
 							int i = (y * width) + x;
