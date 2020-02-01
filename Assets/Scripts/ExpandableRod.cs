@@ -5,37 +5,41 @@ using UnityEngine;
 public class ExpandableRod: MonoBehaviour {
 	public GameObject rodBody;
 	public GameObject rodAttachment;
-	public float initialRodHeight = 2.0f;
-	private float rodHeight;
+	public float initialRodLength = 2.0f;
+	public float minRodLength = 2.0f;
+	public float maxRodLength = 10.0f;
+	private float rodLength;
 
 	// Start is called before the first frame update
 	void Start() {
-		setRodHeight(initialRodHeight);
+		setRodLength(initialRodLength);
 	}
 
 	// Update is called once per frame
 	void Update() {
-		if(Input.GetKey(KeyCode.T)) {
-			float newRodHeight = rodHeight + 0.05f;
-			setRodHeight(newRodHeight);
-		} else if(Input.GetKey(KeyCode.G)) {
-			float newRodHeight = rodHeight - 0.05f;
-			if(newRodHeight < 0.2f) {
-				newRodHeight = 0.2f;
-			}
-			setRodHeight(newRodHeight);
-		}
+		//
 	}
 
-	void setRodHeight(float height) {
+	public void setRodLength(float length) {
 		var spriteRenderer = rodBody.GetComponent<SpriteRenderer>();
 		var spriteSize = spriteRenderer.size;
-		spriteSize.y = height;
+		spriteSize.y = length;
 		spriteRenderer.size = spriteSize;
-		rodBody.transform.localPosition = new Vector2(0, -height);
+		rodBody.transform.localPosition = new Vector2(0, -length);
 		if(rodAttachment != null) {
-			rodAttachment.transform.position = transform.position + new Vector3(0, -height, 0);
+			rodAttachment.transform.position = transform.position + new Vector3(0, -length, 0);
 		}
-		rodHeight = height;
+		rodLength = length;
+	}
+
+	public void expandRod(float amount) {
+		float newRodLength = rodLength + amount;
+		if(newRodLength < minRodLength) {
+			newRodLength = minRodLength;
+		}
+		else if(newRodLength > maxRodLength) {
+			newRodLength = maxRodLength;
+		}
+		setRodLength(newRodLength);
 	}
 }
