@@ -17,7 +17,7 @@ public class Carryable : Interactable
         
     }
 
-    public override void performAction()
+    public override void performAction(Interactor interactor)
     {
         if (!carrying)
         {
