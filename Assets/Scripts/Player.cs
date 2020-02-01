@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+        transform.rotation = Quaternion.identity; //Stop player rotating
     }
 
     private float moveHorizontal;
@@ -73,26 +74,38 @@ public class Player : MonoBehaviour
         //TODO: Make players slow down/stop moving when not pressing any buttons
         if (Input.GetKey(left))
         {
-            moveHorizontal = -1.0f;
+            moveHorizontal = -1.5f;
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
 
         if (Input.GetKey(right))
         {
-            moveHorizontal = 1.0f;
+            moveHorizontal = 1.5f;
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
         if (!Input.GetKey(down))
         {
             falltimer = 0;
             myRigidbody.velocity = new Vector2(moveHorizontal * walkSpeed, myRigidbody.velocity.y);
+            transform.rotation = Quaternion.identity;
         }
         else if (transform.position.y > 0.0f && Input.GetKey(KeyCode.S))
         {
-            Debug.Log("Timer: " + falltimer);
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            //Debug.Log("Timer: " + falltimer);
+            gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, -4.0f - falltimer);
+            transform.rotation = Quaternion.identity;
+        }
+
+        if (!Input.anyKey)
+        {
+            myRigidbody.velocity = new Vector2(0.0f, myRigidbody.velocity.y);
+            transform.rotation = Quaternion.identity;
         }
         #endregion
+
+        
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -104,7 +117,8 @@ public class Player : MonoBehaviour
             if (Input.GetKey(up)) //Move Up ladder
             {
                 myRigidbody.velocity = new Vector2(0.0f, 4.0f);
-                gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+                gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
+                transform.rotation = Quaternion.identity;
             }
         }
     }
@@ -113,8 +127,8 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bottom"))
         {
-            Debug.Log("Turning off trigger!");
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+            //Debug.Log("Turning off trigger!");
+            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
 
@@ -123,13 +137,13 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ladder"))
         {
             myRigidbody.velocity = Vector2.zero;
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
         }
 
         if (other.gameObject.CompareTag("Platform") && myRigidbody.velocity.y < -2.0f)
         {
-            Debug.Log("Turning off trigger!");
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+            //Debug.Log("Turning off trigger!");
+            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
 
@@ -137,8 +151,8 @@ public class Player : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Platform"))
         {
-            Debug.Log("Turning off trigger!");
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+            //Debug.Log("Turning off trigger!");
+            gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
 }
