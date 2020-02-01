@@ -171,10 +171,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6833401681795197819}
-  - component: {fileID: 6833401681795197817}
-  - component: {fileID: 6833401681795197816}
   - component: {fileID: 6833401681795197823}
   - component: {fileID: 6833401681795197822}
+  - component: {fileID: 6833401681795197817}
+  - component: {fileID: -5764583576822297006}
   m_Layer: 0
   m_Name: Magnet Station
   m_TagString: Untagged
@@ -198,33 +198,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6833401681795197817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6833401681795197818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a9bb3db03eb8f4db4c15bb06d84479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
-    type: 3}
-  actIconOffset: {x: 0.6, y: 2.5, z: 0}
---- !u!114 &6833401681795197816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6833401681795197818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb12a6549db70c4e831c86bfb38946e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &6833401681795197823
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -301,3 +274,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62703645, y: 0.46927506}
   m_EdgeRadius: 0
+--- !u!114 &6833401681795197817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833401681795197818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a9bb3db03eb8f4db4c15bb06d84479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
+    type: 3}
+  actIconOffset: {x: 0.6, y: 2.5, z: 0}
+--- !u!114 &-5764583576822297006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833401681795197818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71962cfca51d44c229e8eab22228836b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControls: {fileID: 0}

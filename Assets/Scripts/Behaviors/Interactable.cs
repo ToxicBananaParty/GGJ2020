@@ -9,11 +9,6 @@ public class Interactable: MonoBehaviour {
 	private GameObject actIcon;
 	private List<Interactor> interactors = new List<Interactor>();
 
-	// Start is called before the first frame update
-	void Start() {
-    }
-
-	// Update is called once per frame
 	void Update() {
 		if(actIcon != null) {
 		    actIcon.transform.position = transform.position + actIconOffset;
