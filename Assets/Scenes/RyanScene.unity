@@ -1046,9 +1046,9 @@ GameObject:
   m_Component:
   - component: {fileID: 782761118}
   - component: {fileID: 782761117}
-  - component: {fileID: 782761116}
   - component: {fileID: 782761115}
   - component: {fileID: 782761119}
+  - component: {fileID: 782761116}
   m_Layer: 0
   m_Name: Magnet Lever
   m_TagString: Untagged
@@ -1077,12 +1077,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 782761114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d502cd7f41ec45859a9436be3f7fb43, type: 3}
+  m_Script: {fileID: 11500000, guid: e5a9bb3db03eb8f4db4c15bb06d84479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
     type: 3}
-  actIconOffset: {x: 0, y: -0.8, z: 0}
+  actIconOffset: {x: 0, y: 0.8, z: 0}
 --- !u!212 &782761117
 SpriteRenderer:
   m_ObjectHideFlags: 0
