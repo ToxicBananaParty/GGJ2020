@@ -31,12 +31,12 @@ public class MagnetArm: MonoBehaviour {
 
 	public void moveLeft() {
 		transform.position = transform.position + new Vector3(-horizontalMoveSpeed, 0, 0);
-		magnet.shiftStuckObjects(new Vector3(-horizontalMoveSpeed, 0, 0));
+		magnet.shiftStuckObjects(new Vector3(-horizontalMoveSpeed/2.0f, 0, 0));
 	}
 
 	public void moveRight() {
 		transform.position = transform.position + new Vector3(horizontalMoveSpeed, 0, 0);
-		magnet.shiftStuckObjects(new Vector3(horizontalMoveSpeed, 0, 0));
+		magnet.shiftStuckObjects(new Vector3(horizontalMoveSpeed/2.0f, 0, 0));
 	}
 
 	public void rotateLeft() {

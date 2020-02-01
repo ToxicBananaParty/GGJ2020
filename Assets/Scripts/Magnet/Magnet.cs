@@ -13,13 +13,11 @@ public class Magnet: MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		var circleCollider = GetComponent<CircleCollider2D>();
-		var circleCenter = transform.position - new Vector3(circleCollider.offset.x, circleCollider.offset.y, 0);
 		foreach (var stuckObject in stuckObjects) {
-			var direction = (circleCenter - stuckObject.transform.position).normalized;
+			var direction = (transform.position - stuckObject.transform.position).normalized;
 			direction.z = 0;
 			var force = direction * attractionStrength;
-			stuckObject.GetComponent<Rigidbody2D>().AddForceAtPosition(circleCenter, -force);
+			stuckObject.GetComponent<Rigidbody2D>().AddRelativeForce(force);
 		}
 	}
 
