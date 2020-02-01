@@ -21,7 +21,6 @@ public class StationInteraction : Interactable
 
     public override void performAction(Interactor interactor)
     {
-
         if (!attached) {
             foreach (Transform child in GameObject.Find("Players").transform)
             {

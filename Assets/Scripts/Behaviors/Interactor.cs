@@ -31,12 +31,20 @@ public class Interactor: MonoBehaviour {
 		}
 	}
 
-	public bool interact() {
+	public Interactable interact() {
 		if(interactables.Count == 0) {
-			return false;
+			return null;
 		}
-		var interactable = interactables[0];
-		interactable.performAction(this);
-		return true;
+		Interactable ableInteractable = null;
+		foreach(var interactable in interactables) {
+			if(interactable.canInteract(this)) {
+				ableInteractable = interactable;
+				break;
+			}
+		}
+		if(ableInteractable != null) {
+			ableInteractable.performAction(this);
+		}
+		return ableInteractable;
 	}
 }

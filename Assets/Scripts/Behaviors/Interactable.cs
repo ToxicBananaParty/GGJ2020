@@ -20,27 +20,37 @@ public class Interactable: MonoBehaviour {
 		}
 	}
 
+	public virtual bool canInteract(Interactor interactor) {
+		return true;
+	}
+
 	public virtual void performAction(Interactor interactor) {
 		// open for implementation
 	}
 
 	public void beginInteractor(Interactor interactor) {
 		interactors.Add(interactor);
-		if(interactors.Count == 1) {
-			setActIconVisible(true);
-		}
+		updateInteractionState();
 	}
 
 	public void endInteractor(Interactor interactor) {
 		interactors.Remove(interactor);
-		if (interactors.Count == 0) {
-			setActIconVisible(false);
+		updateInteractionState();
+	}
+
+	public void updateInteractionState() {
+		bool hasAbleInteractor = false;
+		foreach (var interactor in interactors) {
+			if (canInteract(interactor)) {
+				hasAbleInteractor = true;
+				break;
+			}
 		}
+		setActIconVisible(hasAbleInteractor);
 	}
 
 	private void setActIconVisible(bool visible) {
-		if(actIcon == null)
-		{
+		if(actIcon == null) {
             Debug.Log("Changing!");
             actIcon = Instantiate(actIconPrefab);
 		    actIcon.transform.position = transform.position + actIconOffset;
