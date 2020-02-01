@@ -70,7 +70,8 @@ public class PlayerControls : MonoBehaviour
 			if(Input.GetKey(down)) {
                 player.transform.position += new Vector3(0, -climbSpeed, 0);
             }
-			if(climbingLadder) {
+            var magnetic = player.GetComponent<Magnetic>();
+            if (climbingLadder && (magnetic == null || !magnetic.isStuckToMagnet())) {
                 rigidBody.velocity = new Vector2(0.0f, 0.0f);
             }
         } else {
