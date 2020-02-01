@@ -1185,7 +1185,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7175912198723629601, guid: 34a697473c3030146a7a0abab8085b3f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 34a697473c3030146a7a0abab8085b3f, type: 3}
 --- !u!1001 &1037450430
 PrefabInstance:
@@ -1694,7 +1695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8dff8c070232742964206086686c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
   climbSpeed: 0.1
   jumpVelocity: 20
   jumpAmount: 0
