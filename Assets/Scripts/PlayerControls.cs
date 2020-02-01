@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllableObject : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
+    public StationControls stationControls;
+    public KeyCode up, down, left, right, jump;
 
-    private KeyCode up, down, left, right, jump;
     void Start()
     {
         left = KeyCode.A;
@@ -13,7 +14,32 @@ public class ControllableObject : MonoBehaviour
         up = KeyCode.W;
         down = KeyCode.S;
         jump = KeyCode.Space;
+        stationControls = null;
     }
+
+    void FixedUpdate()
+    {
+        if (stationControls == null)
+        {
+            Movement(gameObject.GetComponent<Rigidbody2D>());
+        }
+        else
+        {
+            //Do station controls
+        }
+    }
+
+    void AttachToStation()
+    {
+
+    }
+
+    void DetachFromStation()
+    {
+
+    }
+
+
 
     private float moveHorizontal, falltimer;
     public void Movement(Rigidbody2D myRigidbody)
