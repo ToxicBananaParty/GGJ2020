@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrapMetalEater: MonoBehaviour {
+	public float efficiency = 3.0f;
 	private List<Scrap> scraps = new List<Scrap>();
 
 	// Start is called before the first frame update
@@ -34,7 +35,7 @@ public class ScrapMetalEater: MonoBehaviour {
 			return 0;
 		}
 		Scrap scrap = scraps[0];
-		var scrapEaten = scrap.eatScrap(eatAmount);
+		var scrapEaten = scrap.eatScrap(eatAmount) * efficiency;
 		return scrapEaten;
 	}
 }

@@ -10,7 +10,8 @@ public enum MoldableShapeType {
 }
 
 public class MoldableShape: MonoBehaviour {
-	public float fillAmount = 0;
+	public float initialFillAmount = 0;
+	private float fillAmount = 0;
 
 	public float shapeCompress = 0.5f;
 	public MoldableShapeType shapeType = MoldableShapeType.RECTANGLE;
@@ -44,12 +45,13 @@ public class MoldableShape: MonoBehaviour {
     
 	// Start is called before the first frame update
 	void Start() {
+		fillAmount = initialFillAmount;
 		updateShapeSprite();
 	}
 
 	// Update is called once per frame
 	void Update() {
-		updateShapeSprite();
+		//
 	}
 
 	void updateShapeSprite() {
@@ -89,10 +91,12 @@ public class MoldableShape: MonoBehaviour {
 
 	public bool feedScrap(float scrapAmount) {
 		fillAmount += scrapAmount;
+		bool full = false;
 		if(fillAmount > maxFillAmount) {
 			fillAmount = maxFillAmount;
-			return false;
+			full = true;
 		}
-		return true;
+		updateShapeSprite();
+		return full;
 	}
 }
