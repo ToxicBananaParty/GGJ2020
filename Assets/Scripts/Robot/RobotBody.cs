@@ -29,6 +29,15 @@ public class RobotBody: MonoBehaviour {
 		return touchingShapes;
 	}
 
+	public bool isCoveringBody(MoldableShape shape) {
+		foreach (var cmpShape in touchingShapes) {
+			if (shape == cmpShape) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public DamageCoverResult coverDamage(MoldableShape shape) {
 		var hasShape = false;
 		foreach(var cmpShape in touchingShapes) {
