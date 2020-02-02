@@ -16,7 +16,7 @@ public class Carryable : Interactable
     { 
         if (carrying)
         {
-            transform.position = theInteractor.transform.position + new Vector3(0.0f, 1.5f, 0.0f);
+            transform.position = theInteractor.transform.position + new Vector3(0.0f, 1.55f, 0.0f);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             theInteractor.gameObject.GetComponent<Animator>().SetBool("carrying", true);
         }
