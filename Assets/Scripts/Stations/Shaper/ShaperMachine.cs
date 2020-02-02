@@ -131,6 +131,9 @@ public class ShaperMachine: MonoBehaviour {
 			return;
 		}
 		moldingShape.shaperMachine = null;
+		var localPosition = moldingShape.transform.localPosition;
+		localPosition.z = -4;
+		moldingShape.transform.localPosition = localPosition;
 		var rigidBody = moldingShape.GetComponent<Rigidbody2D>();
 		rigidBody.gravityScale = 1.0f;
 	}
