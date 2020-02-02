@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 6833401681795197822}
   - component: {fileID: 6833401681795197817}
   - component: {fileID: -5764583576822297006}
+  - component: {fileID: -33223063061391111}
   m_Layer: 0
   m_Name: Magnet Station
   m_TagString: Untagged
@@ -289,6 +290,7 @@ MonoBehaviour:
   actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
     type: 3}
   actIconOffset: {x: 0.6, y: 2.5, z: 0}
+  stationControls: {fileID: 0}
 --- !u!114 &-5764583576822297006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,3 +305,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControls: {fileID: 0}
   magnetArm: {fileID: 0}
+--- !u!114 &-33223063061391111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833401681795197818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fadde9f596f649f79e905e447cbd559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

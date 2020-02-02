@@ -17,4 +17,8 @@ public class Robot: MonoBehaviour {
 	public bool canCoverRobot(MoldableShape shape) {
 		return robotBody.isCoveringBody(shape);
 	}
+
+	public DamageCoverResult coverRobot(MoldableShape shape) {
+		return robotBody.coverDamage(shape);
+	}
 }
