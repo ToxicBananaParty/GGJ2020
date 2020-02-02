@@ -10,7 +10,7 @@ public class ScrapButtonInteraction: Interactable {
 
 	// Update is called once per frame
 	void Update() {
-
+		//
 	}
 
 	public override void performAction(Interactor interactor) {

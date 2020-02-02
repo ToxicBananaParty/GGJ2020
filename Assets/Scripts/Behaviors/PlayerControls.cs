@@ -12,6 +12,8 @@ public class PlayerControls : MonoBehaviour
     public KeyCode down = KeyCode.S;
     public KeyCode jump = KeyCode.Space;
     public KeyCode interact = KeyCode.F;
+    public KeyCode secondaryAction = KeyCode.Q;
+    public KeyCode tertiaryAction = KeyCode.E;
 
     private bool climbingLadder = false;
 
