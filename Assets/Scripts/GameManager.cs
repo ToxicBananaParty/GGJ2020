@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameObject = UnityEngine.GameObject;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float inspectionChance = 0.0f;
     public Text timerText;
     public Text cashText;
+    public Color toPaint;
     public GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
         {
             AddPlayer(player);
         }
+
+        //Color assignedColor = AssignColor();
     }
 
     public void AddCash(float profit)
@@ -55,5 +59,36 @@ public class GameManager : MonoBehaviour
     public void DropPlayer(string playerName)
     {
         GameObject.Destroy(GameObject.Find(playerName));
+    }
+
+    public Color AssignColor()
+    {
+        //Paint random color
+        int selection = Random.Range(0, 5);
+        switch (selection)
+        {
+            case 1:
+                toPaint = Color.yellow;
+                break;
+            case 2:
+                toPaint = Color.green;
+                break;
+            case 3:
+                toPaint = Color.red;
+                break;
+            case 4:
+                toPaint = Color.blue;
+                break;
+            default:
+                toPaint = Color.blue;
+                break;
+        }
+        SetColor(GameObject.Find("Canvas/Assignment/Image"), toPaint);
+        return toPaint;
+    }
+
+    void SetColor(GameObject robotPaintZone, Color color)
+    {
+        robotPaintZone.GetComponent<Image>().color = color;
     }
 }

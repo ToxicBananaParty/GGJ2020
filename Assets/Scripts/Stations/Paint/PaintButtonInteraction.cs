@@ -18,6 +18,6 @@ public class PaintButtonInteraction : Interactable
 
     public override void performAction(Interactor interactor)
     {
-        GameObject.Find("Robot").GetComponent<Paint>().Interact();
+        GameObject.Find("Paint").GetComponent<Paint>().Interact();
     }
 }
