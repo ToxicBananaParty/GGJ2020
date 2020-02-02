@@ -9,6 +9,8 @@ public enum MoldableShapeType {
 }
 
 public class MoldableShape: MonoBehaviour {
+	public ShaperMachine shaperMachine;
+
 	public float initialFillAmount = 0;
 	private float fillAmount = 0;
 
@@ -51,6 +53,12 @@ public class MoldableShape: MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		//
+	}
+
+	void OnCollisionEnter2D(Collision2D collision) {
+		if (shaperMachine != null) {
+			Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+		}
 	}
 
 	void updateShapeSprite() {

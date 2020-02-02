@@ -7,6 +7,8 @@ public class ShaperMachineDoor: MonoBehaviour {
 	public Sprite circleDoorSprite;
 	public Sprite squareDoorSprite;
 
+	private bool doorOpen = false;
+
 	// Use this for initialization
 	void Start() {
 
@@ -27,5 +29,18 @@ public class ShaperMachineDoor: MonoBehaviour {
 				doorRenderer.sprite = circleDoorSprite;
 				break;
 		}
+	}
+
+	public void setDoorOpen(bool open) {
+		if(open) {
+			doorBody.transform.localPosition = new Vector3(0, 3.0f, 0);
+		} else {
+			doorBody.transform.localPosition = Vector3.zero;
+		}
+		doorOpen = open;
+	}
+
+	public bool isDoorOpen() {
+		return doorOpen;
 	}
 }

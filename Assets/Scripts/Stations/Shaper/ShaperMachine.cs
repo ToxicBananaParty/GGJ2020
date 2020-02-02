@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ShaperMachine: MonoBehaviour {
 	public MoldableShapeType initialShapeType;
@@ -9,11 +10,13 @@ public class ShaperMachine: MonoBehaviour {
 
 	public GameObject moldedShapePrefab;
 
-	private MoldableShape moldingShape;
+	public MoldableShape moldingShape;
 	private MoldableShapeType shapeType;
 
 	public Sprite circleMachineSprite;
 	public Sprite squareMachineSprite;
+
+	private List<MoldableShape> touchingShapes = new List<MoldableShape>();
 
 	// Use this for initialization
 	void Start() {
@@ -25,10 +28,28 @@ public class ShaperMachine: MonoBehaviour {
 		//
 	}
 
+	void OnTriggerEnter2D(Collider2D collision) {
+		var shape = collision.gameObject.GetComponent<MoldableShape>();
+		if(shape != null) {
+			touchingShapes.Add(shape);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D collision) {
+		var shape = collision.gameObject.GetComponent<MoldableShape>();
+		if (shape != null) {
+			touchingShapes.Remove(shape);
+		}
+	}
+
+
 
 	public void growShape() {
 		if (moldingShape == null) {
 			moldingShape = Instantiate(moldedShapePrefab).GetComponent<MoldableShape>();
+			moldingShape.shaperMachine = this;
+			var rigidBody = moldingShape.GetComponent<Rigidbody2D>();
+			rigidBody.gravityScale = 0;
 			var shapePosition = transform.position;
 			shapePosition.z = shaperMachineDoor.transform.position.z + 0.05f;
 			moldingShape.transform.position = shapePosition;
@@ -75,5 +96,42 @@ public class ShaperMachine: MonoBehaviour {
 				throw new System.Exception("fuk");
 		}
 		setShapeType(newShapeType);
+	}
+
+	public bool canOpenDoor() {
+		bool hasNonOwningShape = false;
+		foreach(var shape in touchingShapes) {
+			if(shape != moldingShape) {
+				hasNonOwningShape = true;
+				break;
+			}
+		}
+		return !hasNonOwningShape;
+	}
+
+	public bool setDoorOpen(bool open) {
+		if(open) {
+			if(!canOpenDoor()) {
+				return false;
+			}
+			shaperMachineDoor.setDoorOpen(true);
+			releaseMoldingShape();
+		} else {
+			shaperMachineDoor.setDoorOpen(false);
+		}
+		return true;
+	}
+
+	public bool isDoorOpen() {
+		return shaperMachineDoor.isDoorOpen();
+	}
+
+	private void releaseMoldingShape() {
+		if(moldingShape == null) {
+			return;
+		}
+		moldingShape.shaperMachine = null;
+		var rigidBody = moldingShape.GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = 1.0f;
 	}
 }
