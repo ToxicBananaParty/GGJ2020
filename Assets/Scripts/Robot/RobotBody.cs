@@ -44,7 +44,8 @@ public class RobotBody: MonoBehaviour {
 			damage.transform.SetParent(this.transform);
 			newDamages.Add(damage);
 		}
-		applyDamages(newDamages);
+
+		//applyDamages(newDamages);
 	}
 
 	public void applyDamages(List<RobotDamage> newDamages) {
