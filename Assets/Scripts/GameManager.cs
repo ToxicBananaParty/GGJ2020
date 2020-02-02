@@ -99,19 +99,19 @@ public class GameManager : MonoBehaviour
     {
         GameObject inspector = Instantiate(inspectorPrefab, new Vector3(-15.0f, -3.0f, 0.0f), Quaternion.identity);
         if (GameObject.Find("Paint Station").GetComponent<PaintButtonInteraction>().currentColor != Color.gray)
-            //GRAY IS PLACEHOLDER FOR INSPECTOR'S COLOR
+            //GRAY IS PLACEHOLDER FOR INSPECTOR'S COUNTRY COLOR
         {
-            //Fine for missing flags
+            inspector.GetComponent<Dialogue>().FoundWrongFlag();
         }
         else
         {
-            //Award for correct flags
+            inspector.GetComponent<Dialogue>().NothingWrong();
         }
     }
 
     void InspectorWarning()
     {
         //Alert player that an inspector will arrive in 30 seconds.
-        GameObject.Find("Inspector Alert").GetComponent<Animator>().SetTrigger("Alert");
+
     }
 }

@@ -19,19 +19,19 @@ public class Dialogue : MonoBehaviour
         
     }
 
-    void FoundWrongPaint()
+    public void FoundWrongPaint()
     {
         chatBubbleText.text = "My my my! You're fucked!";
         GameObject.Find("Main Camera").GetComponent<GameManager>().cash -= 500;
     }
 
-    void FoundWrongFlag()
+    public void FoundWrongFlag()
     {
         chatBubbleText.text = "My my my! You're fucked!";
         GameObject.Find("Main Camera").GetComponent<GameManager>().cash -= 1000;
     }
 
-    void NothingWrong()
+    public void NothingWrong()
     {
         chatBubbleText.text = "Marry me!";
         GameObject.Find("Main Camera").GetComponent<GameManager>().cash += 1000;
