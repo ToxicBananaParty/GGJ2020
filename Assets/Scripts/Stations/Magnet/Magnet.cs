@@ -22,7 +22,7 @@ public class Magnet: MonoBehaviour {
 				var direction = (transform.position - stuckObject.transform.position).normalized;
 				direction.z = 0;
 				var force = direction * attractionStrength;
-				stuckObject.GetComponent<Rigidbody2D>().AddRelativeForce(force);
+				stuckObject.GetComponent<Rigidbody2D>().AddForceAtPosition(force,transform.position);
 			}
 		}
 		
