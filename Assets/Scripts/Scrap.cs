@@ -32,7 +32,7 @@ public class Scrap: MonoBehaviour {
 		}
 	}
 
-	float getScrapVolume() {
+	public float getScrapVolume() {
 		var spriteRenderer = GetComponent<SpriteRenderer>();
 		var bounds = spriteRenderer.bounds;
 		return bounds.size.x * bounds.size.y;
