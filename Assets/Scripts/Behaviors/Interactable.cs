@@ -45,11 +45,13 @@ public class Interactable: MonoBehaviour {
 	}
 
 	private void setActIconVisible(bool visible) {
-		if(actIcon == null) {
+		if(actIcon == null && actIconPrefab != null) {
             actIcon = Instantiate(actIconPrefab);
 		    actIcon.transform.position = transform.position + actIconOffset;
             actIcon.transform.localScale *= 5;
         }
-		actIcon.SetActive(visible);
+		if(actIcon != null) {
+			actIcon.SetActive(visible);
+		}
 	}
 }
