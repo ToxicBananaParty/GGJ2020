@@ -13,12 +13,19 @@ public class Magnet: MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		foreach (var stuckObject in stuckObjects) {
-			var direction = (transform.position - stuckObject.transform.position).normalized;
-			direction.z = 0;
-			var force = direction * attractionStrength;
-			stuckObject.GetComponent<Rigidbody2D>().AddRelativeForce(force);
+		if(active) {
+			foreach (var stuckObject in stuckObjects) {
+				var magnetic = stuckObject.GetComponent<Magnetic>();
+				if(magnetic != null && !magnetic.active) {
+					continue;
+				}
+				var direction = (transform.position - stuckObject.transform.position).normalized;
+				direction.z = 0;
+				var force = direction * attractionStrength;
+				stuckObject.GetComponent<Rigidbody2D>().AddRelativeForce(force);
+			}
 		}
+		
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {
