@@ -47,13 +47,12 @@ public class ShaperMachine: MonoBehaviour {
 	public void growShape() {
 		if (moldingShape == null) {
 			moldingShape = Instantiate(moldedShapePrefab).GetComponent<MoldableShape>();
-			moldingShape.shaperMachine = this;
-			var rigidBody = moldingShape.GetComponent<Rigidbody2D>();
-			rigidBody.gravityScale = 0;
 			var shapePosition = transform.position;
 			shapePosition.z = shaperMachineDoor.transform.position.z + 0.05f;
 			moldingShape.transform.position = shapePosition;
+			moldingShape.attachToMachine(this);
 			moldingShape.shapeType = shapeType;
+
 		}
 		float scrapAmount = scrapEater.eatScrap(0.02f);
 		moldingShape.feedScrap(scrapAmount);
@@ -130,11 +129,6 @@ public class ShaperMachine: MonoBehaviour {
 		if(moldingShape == null) {
 			return;
 		}
-		moldingShape.shaperMachine = null;
-		var localPosition = moldingShape.transform.localPosition;
-		localPosition.z = -4;
-		moldingShape.transform.localPosition = localPosition;
-		var rigidBody = moldingShape.GetComponent<Rigidbody2D>();
-		rigidBody.gravityScale = 1.0f;
+		moldingShape.detachFromMachine();
 	}
 }

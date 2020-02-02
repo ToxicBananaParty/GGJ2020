@@ -9,7 +9,7 @@ public enum MoldableShapeType {
 }
 
 public class MoldableShape: MonoBehaviour {
-	public ShaperMachine shaperMachine;
+	private ShaperMachine shaperMachine;
 
 	public float initialFillAmount = 0;
 	private float fillAmount = 0;
@@ -55,10 +55,23 @@ public class MoldableShape: MonoBehaviour {
 		//
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-		if (shaperMachine != null) {
-			Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
-		}
+	public void attachToMachine(ShaperMachine machine) {
+		shaperMachine = machine;
+		var rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = 0;
+		var collider = GetComponent<BoxCollider2D>();
+		collider.enabled = false;
+	}
+
+	public void detachFromMachine() {
+		shaperMachine = null;
+		var localPosition = transform.localPosition;
+		localPosition.z = -4;
+		transform.localPosition = localPosition;
+		var rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = 1.0f;
+		var collider = GetComponent<BoxCollider2D>();
+		collider.enabled = true;
 	}
 
 	void updateShapeSprite() {
