@@ -52,26 +52,24 @@ public class GameManager : MonoBehaviour
     private bool endWarning = false;
     void FixedUpdate()
     {
-        if (warning)
-        {
-            alertTimer += Time.deltaTime / 2.5f;
-            inspectorWarning.transform.position = Vector2.Lerp(offScreenHome, destination, alertTimer);
-        }
-        if (inspectorWarning.transform.position.x == destination.x)
-        {
-            alertTimer = 0.0f;
-            warning = false;
-            endWarning = true;
-        }
-        if (endWarning && inspectorWarning.transform.position.x != offScreenHome.x)
-        {
-            Debug.Log("Sending back");
-            alertTimer += Time.deltaTime / 2.5f;
-            inspectorWarning.transform.position = Vector2.Lerp(destination, offScreenHome, alertTimer);
-        }
-        if (endWarning && inspectorWarning.transform.position.x == offScreenHome.x)
-        {
-            endWarning = false;
+		if(inspectorWarning != null) {
+            if (warning) {
+                alertTimer += Time.deltaTime / 2.5f;
+                inspectorWarning.transform.position = Vector2.Lerp(offScreenHome, destination, alertTimer);
+            }
+            if (inspectorWarning.transform.position.x == destination.x) {
+                alertTimer = 0.0f;
+                warning = false;
+                endWarning = true;
+            }
+            if (endWarning && inspectorWarning.transform.position.x != offScreenHome.x) {
+                Debug.Log("Sending back");
+                alertTimer += Time.deltaTime / 2.5f;
+                inspectorWarning.transform.position = Vector2.Lerp(destination, offScreenHome, alertTimer);
+            }
+            if (endWarning && inspectorWarning.transform.position.x == offScreenHome.x) {
+                endWarning = false;
+            }
         }
     }
 
