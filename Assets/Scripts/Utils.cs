@@ -1,5 +1,7 @@
 ﻿using System;
-public class NewClass {
-	public NewClass() {
+
+public class Utils {
+	static int indexForPoint(int x, int y, int width) {
+		return (y * width) + x;
 	}
 }

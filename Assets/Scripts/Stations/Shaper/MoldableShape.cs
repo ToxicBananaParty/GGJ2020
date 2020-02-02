@@ -39,10 +39,6 @@ public class MoldableShape: MonoBehaviour {
 			}
 		}
 	}
-
-	private static int indexForPoint(int x, int y, int width) {
-		return (y * width) + x;
-	}
     
 	// Start is called before the first frame update
 	void Start() {
