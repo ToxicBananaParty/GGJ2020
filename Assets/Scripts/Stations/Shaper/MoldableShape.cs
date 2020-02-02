@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum MoldableShapeType {
-	TRIANGLE,
 	RECTANGLE,
 	CIRCLE
 }
