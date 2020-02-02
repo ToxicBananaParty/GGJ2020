@@ -10,6 +10,7 @@ public class RobotDamage: MonoBehaviour {
 	private int damageCoverHeight;
 	private Texture2D damageTexture;
 	private List<MoldableShape> coveringMolds = new List<MoldableShape>();
+	private bool covered = false;
 
 	// Use this for initialization
 	void Start() {
@@ -19,6 +20,10 @@ public class RobotDamage: MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		//
+	}
+
+	public bool isCovered() {
+		return covered;
 	}
 
 	private bool checkCompletelyCovered() {
@@ -69,7 +74,7 @@ public class RobotDamage: MonoBehaviour {
 		}
 	}
 
-	private void coverDamage(MoldableShape shape) {
+	public void coverDamage(MoldableShape shape) {
 		var spriteRenderer = GetComponent<SpriteRenderer>();
 		var bounds = spriteRenderer.bounds;
 		var rect = new Rect(bounds.min.x, bounds.min.y, bounds.size.x, bounds.size.y);
@@ -127,5 +132,9 @@ public class RobotDamage: MonoBehaviour {
 			var visualSpriteRenderer = damageVisualizer.GetComponent<SpriteRenderer>();
 			visualSpriteRenderer.sprite = Sprite.Create(damageTexture, new Rect(0, 0, damageCoverWidth, damageCoverHeight), new Vector2(0.5f, 0.5f));
 		}
+
+		coveringMolds.Add(shape);
+
+		covered = checkCompletelyCovered();
 	}
 }

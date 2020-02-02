@@ -61,4 +61,14 @@ public class Magnet: MonoBehaviour {
 			}
 		}
 	}
+
+	public List<T> getStuckObjects<T>() {
+		List<T> objs = new List<T>();
+		foreach(var obj in stuckObjects) {
+			if (obj is T typeObj) {
+				objs.Add(typeObj);
+			}
+		}
+		return objs;
+	}
 }
