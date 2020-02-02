@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Text timerText;
     public Text cashText;
     public Color toPaint, assignedColor;
-    public GameObject player, inspectorPrefab;
+    public GameObject player, inspectorPrefab, player2Prefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         timer = 600.0f;
         assignedColor = AssignColor();
         if (ControlScheme.numPlayers > 1)
-            AddPlayer(player);
+            AddPlayer(player2Prefab);
 
         inspectorWarning = GameObject.Find("Inspector Alert");
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            AddPlayer(player);
+            AddPlayer(player2Prefab);
         }
     }
 
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 endWarning = true;
             }
             if (endWarning && inspectorWarning.transform.position.x != offScreenHome.x) {
-                Debug.Log("Sending back");
+                //Debug.Log("Sending back");
                 alertTimer += Time.deltaTime / 2.5f;
                 inspectorWarning.transform.position = Vector2.Lerp(destination, offScreenHome, alertTimer);
             }
@@ -78,12 +78,12 @@ public class GameManager : MonoBehaviour
         cash += profit;
     }
 
-    public void AddPlayer(GameObject playerPrefab)
+    public void AddPlayer(GameObject player2Prefab)
     {
         if (GameObject.Find("Players").transform.childCount < 2)
         {
             Debug.Log("Spawning player!");
-            GameObject newPlayer = Instantiate(playerPrefab, GameObject.Find("Players").transform);
+            GameObject newPlayer = Instantiate(player2Prefab, GameObject.Find("Players").transform);
         }
     }
 

@@ -738,6 +738,8 @@ MonoBehaviour:
   assignedColor: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 1179148192684965171, guid: 34a697473c3030146a7a0abab8085b3f, type: 3}
   inspectorPrefab: {fileID: 0}
+  player2Prefab: {fileID: 5104280686704841788, guid: 00257e7fe2748c349bc3f1381a9c379c,
+    type: 3}
 --- !u!4 &271502271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 137489905053844461, guid: d42bcef79b31a434d9bb911b497fb919,
