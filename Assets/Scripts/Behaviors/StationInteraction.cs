@@ -25,15 +25,8 @@ public class StationInteraction : Interactable
 	}
 
 	public override void performAction(Interactor interactor) {
-	    if (!interactor.gameObject.name.Equals("Scrap Station") && !interactor.gameObject.name.Equals("Paint Station"))
-	    {
-	        var player = interactor.GetComponent<Player>();
-	        var stationControls = GetComponent<StationControls>();
-	        player.controls.attachStation(stationControls);
-	    }
-	    else //Do not change controls for paint or scrap stations, just press F to get scrap / paint bot
-	    {
-	        Instantiate(scrapPrefab, GameObject.Find("ScrapSpawn").transform);
-	    }
+	    var player = interactor.GetComponent<Player>();
+	    var stationControls = GetComponent<StationControls>();
+	    player.controls.attachStation(stationControls);
 	}
 }
