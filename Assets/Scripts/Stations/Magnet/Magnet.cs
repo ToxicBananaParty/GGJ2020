@@ -40,7 +40,7 @@ public class Magnet: MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D collision) {
-		if(stuckObjects.Contains(collision.gameObject) && active) {
+		if(stuckObjects.Contains(collision.gameObject)) {
 			var magnetic = collision.gameObject.GetComponent<Magnetic>();
 			stuckObjects.Remove(collision.gameObject);
 			if(magnetic != null) {
