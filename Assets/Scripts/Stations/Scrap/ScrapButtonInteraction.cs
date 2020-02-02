@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ScrapButtonInteraction: Interactable {
+	public GameObject scrapPrefab;
 	// Use this for initialization
 	void Start() {
 

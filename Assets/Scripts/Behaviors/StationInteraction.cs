@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class StationInteraction : Interactable
 {
-    public GameObject scrapPrefab;
     // Start is called before the first frame update
     void Start()
     {
