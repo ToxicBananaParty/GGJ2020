@@ -16,8 +16,9 @@ public class Carryable : Interactable
     { 
         if (carrying)
         {
-            transform.position = theInteractor.transform.position + new Vector3(0.0f, 1.55f, 0.0f);
+            transform.position = theInteractor.transform.position + new Vector3(0.0f, 1.25f, 0.0f);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            theInteractor.gameObject.GetComponent<Player>().climbSpeed = 0.25f; //So can still climb while carrying
             theInteractor.gameObject.GetComponent<Animator>().SetBool("carrying", true);
         }
     }
@@ -32,6 +33,7 @@ public class Carryable : Interactable
         else
         {
             carrying = false;
+            theInteractor.gameObject.GetComponent<Player>().climbSpeed = 0.1f;
             theInteractor.gameObject.GetComponent<Animator>().SetBool("carrying", false);
         }
     }
