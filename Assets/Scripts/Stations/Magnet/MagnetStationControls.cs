@@ -36,7 +36,11 @@ public class MagnetStationControls: StationControls {
 			}
 			var robot = Globals.shared.currentRobot;
 			if (robot != null && Input.GetKeyDown(playerControls.tertiaryAction)) {
-				magnetStation.stickToRobot(robot);
+				Debug.Log("sticking to robot");
+				var results = magnetStation.stickToRobot(robot);
+				foreach(var result in results) {
+					Debug.Log("stick result " + result);
+				}
 			}
 		}
 	}

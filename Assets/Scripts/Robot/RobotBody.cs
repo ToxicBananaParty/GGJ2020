@@ -14,6 +14,7 @@ public class RobotBody: MonoBehaviour {
 
 	private List<RobotDamage> damages = new List<RobotDamage>();
 	private List<MoldableShape> touchingShapes = new List<MoldableShape>();
+	private List<MoldableShape> coveringShapes = new List<MoldableShape>();
 
 	// Use this for initialization
 	void Start() {
@@ -24,6 +25,22 @@ public class RobotBody: MonoBehaviour {
 	void Update() {
 		//
 	}
+
+	void OnTriggerEnter2D(Collider2D collision) {
+		var shape = collision.gameObject.GetComponent<MoldableShape>();
+		if(shape != null) {
+			touchingShapes.Add(shape);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D collision) {
+		var shape = collision.gameObject.GetComponent<MoldableShape>();
+		if (shape != null) {
+			touchingShapes.Remove(shape);
+		}
+	}
+
+
 
 	public List<MoldableShape> getTouchingShapes() {
 		return touchingShapes;
@@ -53,10 +70,8 @@ public class RobotBody: MonoBehaviour {
 		foreach(var damage in coveringDamages) {
 			damage.coverDamage(shape);
 		}
-		var rigidBody = shape.GetComponent<Rigidbody2D>();
-		rigidBody.gravityScale = 0.0f;
-		var collider = shape.GetComponent<BoxCollider2D>();
-		collider.enabled = false;
+		coveringShapes.Add(shape);
+		shape.attachToRobotBody(this);
 		if(coveringDamages.Count == 0) {
 			return DamageCoverResult.NO_DAMAGE_COVERED;
 		}
@@ -67,7 +82,7 @@ public class RobotBody: MonoBehaviour {
 				break;
 			}
 		}
-		if(covered) {
+		if (covered) {
 			return DamageCoverResult.EVERYTHING_COVERED;
 		}
 		return DamageCoverResult.SOME_DAMAGE_COVERED;

@@ -53,14 +53,14 @@ public class MoldableShape: MonoBehaviour {
 		//
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
+	void OnTriggerEnter2D(Collider2D collision) {
 		var robotDamage = collision.gameObject.GetComponent<RobotDamage>();
 		if(robotDamage != null) {
 			touchingDamages.Add(robotDamage);
 		}
 	}
 
-	void OnCollisionExit2D(Collision2D collision) {
+	void OnTriggerExit2D(Collider2D collision) {
 		var robotDamage = collision.gameObject.GetComponent<RobotDamage>();
 		if (robotDamage != null) {
 			touchingDamages.Remove(robotDamage);
@@ -75,6 +75,8 @@ public class MoldableShape: MonoBehaviour {
 		rigidBody.gravityScale = 0;
 		var collider = GetComponent<BoxCollider2D>();
 		collider.enabled = false;
+		var magnetic = GetComponent<Magnetic>();
+		magnetic.active = false;
 	}
 
 	public void detachFromMachine() {
@@ -86,6 +88,17 @@ public class MoldableShape: MonoBehaviour {
 		rigidBody.gravityScale = 1.0f;
 		var collider = GetComponent<BoxCollider2D>();
 		collider.enabled = true;
+		var magnetic = GetComponent<Magnetic>();
+		magnetic.active = true;
+	}
+
+	public void attachToRobotBody(RobotBody body) {
+		var rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = 0.0f;
+		var collider = GetComponent<BoxCollider2D>();
+		collider.enabled = false;
+		var magnetic = GetComponent<Magnetic>();
+		magnetic.active = false;
 	}
 
 	public List<RobotDamage> getTouchingDamages() {
