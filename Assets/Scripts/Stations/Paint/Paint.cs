@@ -15,7 +15,7 @@ public class Paint : MonoBehaviour
         //TODO: Call Interact method when player interacts w/ station
     }
 
-    void Interact()
+    public void Interact()
     {
         //Paint random color
         int selection = Random.Range(1, 4);
