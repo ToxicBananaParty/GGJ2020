@@ -20,5 +20,6 @@ public class PaintButtonInteraction : Interactable
     public override void performAction(Interactor interactor)
     {
         currentColor = GameObject.Find("Paint").GetComponent<Paint>().Interact();
+        interactor.gameObject.GetComponent<Animator>().SetTrigger("Press");
     }
 }
