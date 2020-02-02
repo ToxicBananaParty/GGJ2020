@@ -2986,6 +2986,11 @@ PrefabInstance:
       propertyPath: initialFillAmount
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6610072338271225181, guid: addb6a949895d4826849a3aaccfd50aa,
+        type: 3}
+      propertyPath: shapeType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6610072338271225183, guid: addb6a949895d4826849a3aaccfd50aa,
         type: 3}
       propertyPath: m_LocalPosition.x

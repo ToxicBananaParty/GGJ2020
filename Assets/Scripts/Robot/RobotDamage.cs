@@ -75,6 +75,7 @@ public class RobotDamage: MonoBehaviour {
 	}
 
 	public void coverDamage(MoldableShape shape) {
+		Debug.Log("coverDamage: " + this + " and " + shape);
 		var spriteRenderer = GetComponent<SpriteRenderer>();
 		var bounds = spriteRenderer.bounds;
 		var rect = new Rect(bounds.min.x, bounds.min.y, bounds.size.x, bounds.size.y);
@@ -112,7 +113,7 @@ public class RobotDamage: MonoBehaviour {
 				}
 				var centerOffsetX = (shapeTextureCenterX - (float)x) * shapeSpriteRatioX;
 				var centerOffsetY = (shapeTextureCenterY - (float)y) * shapeSpriteRatioY;
-				var point = matrix.transform(centerOffsetX, centerOffsetY);
+				var point = matrix.transform(centerOffsetX, -centerOffsetY) + shapeRect.center;
 				if(!rect.Contains(point)) {
 					i++;
 					continue;
