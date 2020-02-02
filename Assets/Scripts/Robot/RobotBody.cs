@@ -24,8 +24,15 @@ public class RobotBody: MonoBehaviour {
 		List<RobotDamage> newDamages = new List<RobotDamage>();
 		for(int i=0; i<numDamage; i++) {
 			var damage = Instantiate(damagePrefab).GetComponent<RobotDamage>();
+
 			var scale = Random.Range(0.1f, 0.6f);
 			damage.transform.localScale = new Vector3(scale, scale, scale);
+
+			/*var rotation = Random.Range(-180.0f, 180.0f);
+			var localRotation = damage.transform.localRotation;
+			localRotation.z = rotation;
+			damage.transform.localRotation = localRotation;*/
+
 			var damageSpriteRenderer = damage.GetComponent<SpriteRenderer>();
 			var damageBounds = damageSpriteRenderer.bounds;
 			var damagePadding = damageBounds.size / 2.0f;
@@ -33,6 +40,7 @@ public class RobotBody: MonoBehaviour {
 				Random.Range(bounds.min.x + damagePadding.x, bounds.max.x - damagePadding.x),
 				Random.Range(bounds.min.y + damagePadding.y, bounds.max.y - damagePadding.y),
 				damage.transform.position.z);
+
 			damage.transform.SetParent(this.transform);
 			newDamages.Add(damage);
 		}
@@ -52,14 +60,14 @@ public class RobotBody: MonoBehaviour {
 
 		Graphics.Blit(currentTexture, renderTexture);
 
-		GL.PushMatrix();
-		GL.LoadPixelMatrix(0, currentTexture.width, currentTexture.height, 0);
-
 		float widthRatio = (float)currentTexture.width / bounds.size.x;
 		float heightRatio = (float)currentTexture.height / bounds.size.y;
 		float width = (float)newTexture.width;
 		float height = (float)newTexture.height;
 		foreach(var damage in newDamages) {
+			GL.PushMatrix();
+			GL.LoadPixelMatrix(0, currentTexture.width, currentTexture.height, 0);
+
 			var damageSpriteRenderer = damage.GetComponent<SpriteRenderer>();
 			var damageBounds = damageSpriteRenderer.bounds;
 			var damageTexture = damageSpriteRenderer.sprite.texture;
@@ -72,14 +80,14 @@ public class RobotBody: MonoBehaviour {
 			damages.Add(damage);
 
 			var color = Color.red;
-			color.a = 0.6f;
+			color.a = 0.4f;
 			damageSpriteRenderer.color = color;
+
+			GL.PopMatrix();
 		}
 
 		newTexture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
 		newTexture.Apply();
-
-		GL.PopMatrix();
 
 		RenderTexture.active = prevRenderTexture;
 		renderTexture.Release();
