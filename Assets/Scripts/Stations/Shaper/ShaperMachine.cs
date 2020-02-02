@@ -4,16 +4,16 @@ using System.Collections;
 public class ShaperMachine: MonoBehaviour {
 	public MoldableShapeType initialShapeType;
 
-	public GameObject shapingMachineDoor;
+	public ShaperMachineDoor shaperMachineDoor;
 	public ScrapMetalEater scrapEater;
 
 	public GameObject moldedShapePrefab;
 
-	public Sprite circleDoorSprite;
-	public Sprite squareDoorSprite;
-
 	private MoldableShape moldingShape;
 	private MoldableShapeType shapeType;
+
+	public Sprite circleMachineSprite;
+	public Sprite squareMachineSprite;
 
 	// Use this for initialization
 	void Start() {
@@ -30,7 +30,7 @@ public class ShaperMachine: MonoBehaviour {
 		if (moldingShape == null) {
 			moldingShape = Instantiate(moldedShapePrefab).GetComponent<MoldableShape>();
 			var shapePosition = transform.position;
-			shapePosition.z = shapingMachineDoor.transform.position.z + 0.05f;
+			shapePosition.z = shaperMachineDoor.transform.position.z + 0.05f;
 			moldingShape.transform.position = shapePosition;
 			moldingShape.shapeType = shapeType;
 		}
@@ -38,16 +38,42 @@ public class ShaperMachine: MonoBehaviour {
 		moldingShape.feedScrap(scrapAmount);
 	}
 
+	public bool isGrowingShape() {
+		return (moldingShape != null);
+	}
+
 	public void setShapeType(MoldableShapeType shapeType) {
+		if(moldingShape != null) {
+			throw new System.Exception("can't change shape type while growing a shape");
+		}
 		this.shapeType = shapeType;
-		var doorRenderer = shapingMachineDoor.GetComponent<SpriteRenderer>();
+		shaperMachineDoor.setShapeType(shapeType);
+		var doorRenderer = GetComponent<SpriteRenderer>();
 		switch (shapeType) {
 			case MoldableShapeType.RECTANGLE:
-				doorRenderer.sprite = squareDoorSprite;
+				doorRenderer.sprite = squareMachineSprite;
 				break;
 			case MoldableShapeType.CIRCLE:
-				doorRenderer.sprite = circleDoorSprite;
+				doorRenderer.sprite = circleMachineSprite;
 				break;
 		}
+	}
+
+	public void cycleShape() {
+		if(isGrowingShape()) {
+			return;
+		}
+		MoldableShapeType newShapeType;
+		switch(shapeType) {
+			case MoldableShapeType.RECTANGLE:
+				newShapeType = MoldableShapeType.CIRCLE;
+				break;
+			case MoldableShapeType.CIRCLE:
+				newShapeType = MoldableShapeType.RECTANGLE;
+				break;
+			default:
+				throw new System.Exception("fuk");
+		}
+		setShapeType(newShapeType);
 	}
 }

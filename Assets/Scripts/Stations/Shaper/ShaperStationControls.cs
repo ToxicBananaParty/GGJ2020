@@ -18,9 +18,10 @@ public class ShaperStationControls: StationControls {
 			if(Input.GetKey(playerControls.secondaryAction)) {
                 shapingMachine.growShape();
 			}
+			if(!shapingMachine.isGrowingShape() && Input.GetKeyDown(playerControls.tertiaryAction)) {
+                shapingMachine.cycleShape();
+			}
 		}
     }
-
-
 	
 }
