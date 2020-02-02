@@ -14,16 +14,18 @@ public class GameManager : MonoBehaviour
     public float inspectionChance = 0.0f;
     public Text timerText;
     public Text cashText;
-    public Color toPaint;
-    public GameObject player;
+    public Color toPaint, assignedColor;
+    public GameObject player, inspectorPrefab;
     // Start is called before the first frame update
     void Start()
     {
         //Start timer at level start
         timer = 600.0f;
-
-        if(ControlScheme.numPlayers > 1)
+        assignedColor = AssignColor();
+        if (ControlScheme.numPlayers > 1)
             AddPlayer(player);
+
+        InvokeRepeating("SendInspector", 60, 500);
     }
 
     // Update is called once per frame
@@ -38,8 +40,6 @@ public class GameManager : MonoBehaviour
         {
             AddPlayer(player);
         }
-
-        //Color assignedColor = AssignColor();
     }
 
     public void AddCash(float profit)
@@ -90,5 +90,19 @@ public class GameManager : MonoBehaviour
     void SetColor(GameObject robotPaintZone, Color color)
     {
         robotPaintZone.GetComponent<Image>().color = color;
+    }
+
+    void SendInspector()
+    {
+        GameObject inspector = Instantiate(inspectorPrefab, new Vector3(-15.0f, -3.0f, 0.0f), Quaternion.identity);
+        if (GameObject.Find("Paint Station").GetComponent<PaintButtonInteraction>().currentColor != Color.gray)
+            //GRAY IS PLACEHOLDER FOR INSPECTOR'S COLOR
+        {
+            //Fine for missing flags
+        }
+        else
+        {
+            //Award for correct flags
+        }
     }
 }
