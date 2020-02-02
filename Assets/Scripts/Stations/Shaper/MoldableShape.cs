@@ -11,15 +11,31 @@ public enum MoldableShapeType {
 
 public class MoldableShape: MonoBehaviour {
 	public float fillAmount = 0;
+
 	public float shapeCompress = 0.5f;
 	public MoldableShapeType shapeType = MoldableShapeType.RECTANGLE;
 
 	public Sprite squareSprite;
 	public Sprite circleSprite;
 
-	private static float circleMaxRadius = 128.0f;
-	private static float circleMaxFillAmount {
-		get { return (float)(Math.PI * (double)circleMaxRadius * (double)circleMaxRadius); }
+	private float circleMaxRadius {
+		get { return circleSprite.bounds.size.x / 2.0f; }
+	}
+	private float maxFillAmount {
+		get {
+			switch(shapeType) {
+				case MoldableShapeType.RECTANGLE: {
+						var size = squareSprite.bounds.size;
+						return size.x * size.y;
+					}
+				case MoldableShapeType.CIRCLE: {
+						var size = circleSprite.bounds.size;
+						return size.x * size.y;
+					}
+				default:
+					throw new Exception("dicks n shit");
+			}
+		}
 	}
 
 	private static int indexForPoint(int x, int y, int width) {
@@ -33,7 +49,7 @@ public class MoldableShape: MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		//
+		updateShapeSprite();
 	}
 
 	void updateShapeSprite() {
@@ -58,16 +74,25 @@ public class MoldableShape: MonoBehaviour {
 				break;
 			case MoldableShapeType.CIRCLE: {
 					spriteRenderer.sprite = circleSprite;
-					var spriteSize = circleSprite.bounds.size;
+					var spriteRadius = circleSprite.bounds.size / 2.0f;
 					float radius = (float)Math.Sqrt((double)fillAmount / Math.PI);
 					if(radius > circleMaxRadius) {
 						radius = circleMaxRadius;
 					}
-					transform.localScale = new Vector2(radius / spriteSize.x, radius / spriteSize.y);
+					transform.localScale = new Vector2(radius / spriteRadius.x, radius / spriteRadius.y);
 				}
 				break;
 			default:
 				throw new Exception("butts");
 		}
+	}
+
+	public bool feedScrap(float scrapAmount) {
+		fillAmount += scrapAmount;
+		if(fillAmount > maxFillAmount) {
+			fillAmount = maxFillAmount;
+			return false;
+		}
+		return true;
 	}
 }

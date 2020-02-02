@@ -34,6 +34,7 @@ public class ScrapMetalEater: MonoBehaviour {
 			return 0;
 		}
 		Scrap scrap = scraps[0];
-		return scrap.eatScrap(eatAmount);
+		var scrapEaten = scrap.eatScrap(eatAmount);
+		return scrapEaten;
 	}
 }
