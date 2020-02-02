@@ -26,7 +26,13 @@ public class RobotBody: MonoBehaviour {
 			var damage = Instantiate(damagePrefab).GetComponent<RobotDamage>();
 			var scale = Random.Range(0.1f, 0.6f);
 			damage.transform.localScale = new Vector3(scale, scale, scale);
-			damage.transform.position = new Vector3(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.x, bounds.max.x), damage.transform.position.z);
+			var damageSpriteRenderer = damage.GetComponent<SpriteRenderer>();
+			var damageBounds = damageSpriteRenderer.bounds;
+			var damagePadding = damageBounds.size / 2.0f;
+			damage.transform.position = new Vector3(
+				Random.Range(bounds.min.x + damagePadding.x, bounds.max.x - damagePadding.x),
+				Random.Range(bounds.min.y + damagePadding.y, bounds.max.y - damagePadding.y),
+				damage.transform.position.z);
 			damage.transform.SetParent(this.transform);
 			newDamages.Add(damage);
 		}
