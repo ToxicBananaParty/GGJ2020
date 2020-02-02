@@ -1604,6 +1604,7 @@ GameObject:
   - component: {fileID: 1085081089}
   - component: {fileID: 1085081088}
   - component: {fileID: 1085081090}
+  - component: {fileID: 1085081091}
   m_Layer: 0
   m_Name: Robot Body
   m_TagString: Untagged
@@ -1689,6 +1690,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePrefab: {fileID: 8153083752911247563, guid: 86c78ffb7ead046d1bec51bd8c965bc7,
     type: 3}
+--- !u!58 &1085081091
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085081087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.021167595, y: 0.0635016}
+  serializedVersion: 2
+  m_Radius: 5.3383265
 --- !u!1 &1100833698
 GameObject:
   m_ObjectHideFlags: 0

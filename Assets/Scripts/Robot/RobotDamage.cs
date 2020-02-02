@@ -38,7 +38,6 @@ public class RobotDamage: MonoBehaviour {
 	private void generateDamageCover() {
 		float density = 5.0f;
 		var spriteRenderer = GetComponent<SpriteRenderer>();
-		Debug.Log("spriteRenderer bounds size " + spriteRenderer.size);
 		var bounds = spriteRenderer.bounds;
 		var texture = spriteRenderer.sprite.texture;
 
@@ -46,7 +45,6 @@ public class RobotDamage: MonoBehaviour {
 		int height = (int)(bounds.size.y * density);
 		int length = width * height;
 
-		Debug.Log("creating damage texture sized " + width + ", " + height);
 		damageCover = new bool[length];
 		damageTexture = new Texture2D(width,height);
 		damageCoverWidth = width;
@@ -66,6 +64,8 @@ public class RobotDamage: MonoBehaviour {
 				damageIndex += 1;
 			}
 		}
+
+		// TODO reapply damage cover if needed
 
 		damageTexture.Apply();
 		if(damageVisualizer != null) {

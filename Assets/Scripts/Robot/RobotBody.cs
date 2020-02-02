@@ -2,10 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum DamageCoverResult {
+	EVERYTHING_COVERED,
+	SOME_DAMAGE_COVERED,
+	NO_DAMAGE_COVERED,
+	NOT_COVERED
+}
+
 public class RobotBody: MonoBehaviour {
 	public GameObject damagePrefab;
 
 	private List<RobotDamage> damages = new List<RobotDamage>();
+	private List<MoldableShape> touchingShapes = new List<MoldableShape>();
 
 	// Use this for initialization
 	void Start() {
@@ -15,6 +23,41 @@ public class RobotBody: MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 
+	}
+
+	public DamageCoverResult coverDamage(MoldableShape shape) {
+		var hasShape = false;
+		foreach(var cmpShape in touchingShapes) {
+			if(shape == cmpShape) {
+				hasShape = true;
+				break;
+			}
+		}
+		if(!hasShape) {
+			return DamageCoverResult.NOT_COVERED;
+		}
+		var coveringDamages = shape.getTouchingDamages();
+		foreach(var damage in coveringDamages) {
+			damage.coverDamage(shape);
+		}
+		var rigidBody = shape.GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = 0.0f;
+		var collider = shape.GetComponent<BoxCollider2D>();
+		collider.enabled = false;
+		if(coveringDamages.Count == 0) {
+			return DamageCoverResult.NO_DAMAGE_COVERED;
+		}
+		var covered = true;
+		foreach(var damage in damages) {
+			if(!damage.isCovered()) {
+				covered = false;
+				break;
+			}
+		}
+		if(covered) {
+			return DamageCoverResult.EVERYTHING_COVERED;
+		}
+		return DamageCoverResult.SOME_DAMAGE_COVERED;
 	}
 
 	public void randomizeDamage(int minDamage, int maxDamage) {

@@ -20,6 +20,8 @@ public class MoldableShape: MonoBehaviour {
 	public Sprite squareSprite;
 	public Sprite circleSprite;
 
+	private List<RobotDamage> touchingDamages = new List<RobotDamage>();
+
 	private float circleMaxRadius {
 		get { return circleSprite.bounds.size.x / 2.0f; }
 	}
@@ -51,6 +53,22 @@ public class MoldableShape: MonoBehaviour {
 		//
 	}
 
+	void OnCollisionEnter2D(Collision2D collision) {
+		var robotDamage = collision.gameObject.GetComponent<RobotDamage>();
+		if(robotDamage != null) {
+			touchingDamages.Add(robotDamage);
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D collision) {
+		var robotDamage = collision.gameObject.GetComponent<RobotDamage>();
+		if (robotDamage != null) {
+			touchingDamages.Remove(robotDamage);
+		}
+	}
+
+
+
 	public void attachToMachine(ShaperMachine machine) {
 		shaperMachine = machine;
 		var rigidBody = GetComponent<Rigidbody2D>();
@@ -68,6 +86,10 @@ public class MoldableShape: MonoBehaviour {
 		rigidBody.gravityScale = 1.0f;
 		var collider = GetComponent<BoxCollider2D>();
 		collider.enabled = true;
+	}
+
+	public List<RobotDamage> getTouchingDamages() {
+		return touchingDamages;
 	}
 
 	void updateShapeSprite() {
