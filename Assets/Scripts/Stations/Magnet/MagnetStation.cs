@@ -28,8 +28,8 @@ public class MagnetStation: MonoBehaviour {
 
 	public List<DamageCoverResult> stickToRobot(Robot robot) {
 		var list = new List<DamageCoverResult>();
-		foreach (var shape in magnetArm.magnet.getStuckObjects<MoldableShape>()) {
-			Debug.Log("sticking shape to robot");
+		var shapes = magnetArm.magnet.getStuckObjects<MoldableShape>();
+		foreach (var shape in shapes) {
 			var result = robot.coverRobot(shape);
 			list.Add(result);
 		}

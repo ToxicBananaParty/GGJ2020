@@ -62,10 +62,11 @@ public class Magnet: MonoBehaviour {
 		}
 	}
 
-	public List<T> getStuckObjects<T>() {
+	public List<T> getStuckObjects<T>() where T: class {
 		List<T> objs = new List<T>();
 		foreach(var obj in stuckObjects) {
-			if (obj is T typeObj) {
+			T typeObj = obj.GetComponent<T>();
+			if (typeObj != null) {
 				objs.Add(typeObj);
 			}
 		}
