@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
             AddPlayer(player);
 
         InvokeRepeating("SendInspector", 60, 500);
+        InvokeRepeating("InspectorWarning", 30, 500);
     }
 
     // Update is called once per frame
@@ -106,5 +107,11 @@ public class GameManager : MonoBehaviour
         {
             //Award for correct flags
         }
+    }
+
+    void InspectorWarning()
+    {
+        //Alert player that an inspector will arrive in 30 seconds.
+        GameObject.Find("Inspector Alert").GetComponent<Animator>().SetTrigger("Alert");
     }
 }
