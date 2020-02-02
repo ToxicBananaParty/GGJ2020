@@ -10,15 +10,10 @@ public class Paint : MonoBehaviour
     {
     }
 
-    void Update()
-    {
-        //TODO: Call Interact method when player interacts w/ station
-    }
-
     public void Interact()
     {
         //Paint random color
-        int selection = Random.Range(1, 4);
+        int selection = Random.Range(0, 5);
         switch (selection)
         {
             case 1:
@@ -34,10 +29,10 @@ public class Paint : MonoBehaviour
                 toPaint = Color.blue;
                 break;
             default:
-                toPaint = Color.black;
+                toPaint = Color.blue;
                 break;
         }
-        SetColor(GameObject.Find("NAME OF COLORABLE GAMEOBJECT HERE"), toPaint);
+        SetColor(gameObject, toPaint);
     }
 
     void SetColor(GameObject robotPaintZone, Color color)
