@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerControls : MonoBehaviour
 {
     public Player player;
     public StationControls stationControls;
+
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode up = KeyCode.W;
@@ -20,6 +22,16 @@ public class PlayerControls : MonoBehaviour
     void Start() {
 		if(player == null) {
             player = GetComponent<Player>();
+        }
+
+        if (GameObject.Find("Players").transform.childCount > 1)
+        {
+            left = KeyCode.LeftArrow;
+            right = KeyCode.RightArrow;
+            up = KeyCode.UpArrow;
+            down = KeyCode.DownArrow;
+            jump = KeyCode.RightControl;
+            interact = KeyCode.RightShift;
         }
     }
 

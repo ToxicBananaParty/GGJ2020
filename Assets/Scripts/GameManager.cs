@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(GameObject playerPrefab)
     {
-        if (GameObject.Find("Players").transform.childCount < 4)
+        if (GameObject.Find("Players").transform.childCount < 2)
         {
             Debug.Log("Spawning player!");
             GameObject newPlayer = Instantiate(playerPrefab, GameObject.Find("Players").transform);
