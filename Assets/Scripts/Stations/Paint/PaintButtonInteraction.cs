@@ -5,6 +5,7 @@ using UnityEngine;
 public class PaintButtonInteraction : Interactable
 {
     // Start is called before the first frame update
+    public Color currentColor;
     void Start()
     {
         
@@ -18,6 +19,6 @@ public class PaintButtonInteraction : Interactable
 
     public override void performAction(Interactor interactor)
     {
-        GameObject.Find("Paint").GetComponent<Paint>().Interact();
+        currentColor = GameObject.Find("Paint").GetComponent<Paint>().Interact();
     }
 }

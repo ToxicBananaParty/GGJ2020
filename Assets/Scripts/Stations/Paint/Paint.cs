@@ -10,7 +10,7 @@ public class Paint : MonoBehaviour
     {
     }
 
-    public void Interact()
+    public Color Interact()
     {
         //Paint random color
         int selection = Random.Range(0, 5);
@@ -33,6 +33,7 @@ public class Paint : MonoBehaviour
                 break;
         }
         SetColor(gameObject, toPaint);
+        return toPaint;
     }
 
     void SetColor(GameObject robotPaintZone, Color color)
