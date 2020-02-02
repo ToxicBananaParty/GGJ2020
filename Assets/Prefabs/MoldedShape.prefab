@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d723ba4db758a5f4aa944d9d6459de14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actIconPrefab: {fileID: 0}
+  actIconPrefab: {fileID: 5115938169941852716, guid: 21648e59a9f424a839206625f8a5e332,
+    type: 3}
   actIconOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &6610072338271225181
 MonoBehaviour:
