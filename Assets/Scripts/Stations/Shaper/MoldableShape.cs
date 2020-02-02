@@ -14,6 +14,9 @@ public class MoldableShape: MonoBehaviour {
 	public float shapeCompress = 0.5f;
 	public MoldableShapeType shapeType = MoldableShapeType.RECTANGLE;
 
+	public Sprite squareSprite;
+	public Sprite circleSprite;
+
 	private static float circleMaxRadius = 128.0f;
 	private static float circleMaxFillAmount {
 		get { return (float)(Math.PI * (double)circleMaxRadius * (double)circleMaxRadius); }
