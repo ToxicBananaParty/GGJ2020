@@ -28,7 +28,7 @@ public class MoldableShape: MonoBehaviour {
     
 	// Start is called before the first frame update
 	void Start() {
-		updateShapeTexture();
+		updateShapeSprite();
 	}
 
 	// Update is called once per frame
@@ -36,89 +36,38 @@ public class MoldableShape: MonoBehaviour {
 		//
 	}
 
-	void updateShapeTexture() {
-		int width = 256;
-		int height = 256;
-		var pixels = new Color[width*height];
-		for(int i=0; i<pixels.Length; i++) {
-			pixels[i] = new Color(0,0,0,0);
-		}
-		Vector2[] points;
-
-		float pixelsPerUnit = 100.0f;
-
+	void updateShapeSprite() {
+		var spriteRenderer = GetComponent<SpriteRenderer>();
 		switch(shapeType) {
 			case MoldableShapeType.RECTANGLE: {
-					float insetAmount = ((float)width / 2.0f) * shapeCompress;
-					float shapeWidth = (float)width - (2.0f * insetAmount);
-					float fillHeight = fillAmount > 0 ? (fillAmount / shapeWidth) : 0;
-					if(fillHeight > (float)height) {
-						fillHeight = (float)height;
+					spriteRenderer.sprite = squareSprite;
+					var spriteSize = squareSprite.bounds.size;
+					float insetAmount = (spriteSize.x / 2.0f) * shapeCompress;
+					float shapeWidth = spriteSize.x - (2.0f * insetAmount);
+					float fillHeight = (fillAmount / shapeWidth);
+					if(fillHeight > spriteSize.y) {
+						fillHeight = spriteSize.y;
 					}
-					// update sprite
-					int fillEndX = width - (int)insetAmount;
-					for (int x=(int)insetAmount; x<fillEndX; x++) {
-						for(int y=0; y<(int)fillHeight; y++) {
-							int i = (y * width) + x;
-							pixels[i] = Color.black;
-						}
-					}
-					
-					points = new Vector2[4];
-					float xExtrude = (shapeWidth / 2.0f) / pixelsPerUnit;
-					float yTop = -(((float)height / 2.0f) - fillHeight) / pixelsPerUnit;
-					float yBottom = -((float)height / 2.0f) / pixelsPerUnit;
-					points[0] = new Vector2(-xExtrude, yTop);
-					points[1] = new Vector2(xExtrude, yTop);
-					points[2] = new Vector2(xExtrude, yBottom);
-					points[3] = new Vector2(-xExtrude, yBottom);
+					float prevHeight = spriteSize.y * transform.localScale.y;
+					transform.localScale = new Vector2(shapeWidth / spriteSize.x, fillHeight / spriteSize.y);
+					float positionDiff = (fillHeight - prevHeight) / 2.0f;
+					var position = transform.position;
+					position.y += positionDiff;
+					transform.position = position;
 				}
 				break;
 			case MoldableShapeType.CIRCLE: {
+					spriteRenderer.sprite = circleSprite;
+					var spriteSize = circleSprite.bounds.size;
 					float radius = (float)Math.Sqrt((double)fillAmount / Math.PI);
 					if(radius > circleMaxRadius) {
 						radius = circleMaxRadius;
 					}
-					int cx = (width / 2);
-					int cy = (height / 2);
-					int radiusInt = (int)radius;
-					for(int x=0; x<radiusInt; x++) {
-						int d = (int)Mathf.Ceil(Mathf.Sqrt(radiusInt * radiusInt - x * x));
-						for (int y=0; y<d; y++) {
-							int px = cx + x;
-							int nx = cx - x;
-							int py = cy + y;
-							int ny = cy - y;
-
-							pixels[indexForPoint(px, py, width)] = Color.black;
-							pixels[indexForPoint(nx, py, width)] = Color.black;
-							pixels[indexForPoint(px, ny, width)] = Color.black;
-							pixels[indexForPoint(nx, ny, width)] = Color.black;
-						}
-					}
-
-					points = new Vector2[4];
-					float halfRadius = (radius / 2.0f) / pixelsPerUnit;
-					points[0] = new Vector2(-halfRadius, -halfRadius);
-					points[1] = new Vector2(halfRadius, -halfRadius);
-					points[2] = new Vector2(halfRadius, halfRadius);
-					points[3] = new Vector2(-halfRadius, halfRadius);
+					transform.localScale = new Vector2(radius / spriteSize.x, radius / spriteSize.y);
 				}
 				break;
 			default:
 				throw new Exception("butts");
-		}
-
-		var texture = new Texture2D(width, height);
-		texture.SetPixels(pixels);
-		texture.Apply();
-		var spriteRenderer = GetComponent<SpriteRenderer>();
-		var sprite = Sprite.Create(texture, new Rect(0, 0, (float)width, (float)height), new Vector2(0.5f, 0.5f), pixelsPerUnit);
-		spriteRenderer.sprite = sprite;
-
-		var polygonCollider = GetComponent<PolygonCollider2D>();
-		if(polygonCollider != null) {
-			polygonCollider.SetPath(0, points);
 		}
 	}
 }
