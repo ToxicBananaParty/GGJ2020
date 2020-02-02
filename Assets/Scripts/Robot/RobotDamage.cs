@@ -136,5 +136,6 @@ public class RobotDamage: MonoBehaviour {
 		coveringMolds.Add(shape);
 
 		covered = checkCompletelyCovered();
+		Debug.Log("covered damage? " + covered);
 	}
 }
