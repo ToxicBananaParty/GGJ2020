@@ -51,8 +51,14 @@ public class Magnet: MonoBehaviour {
 	}
 
 	public void shiftStuckObjects(Vector3 shiftAmount) {
-		foreach(var stuckObject in stuckObjects) {
-			stuckObject.transform.position = stuckObject.transform.position + shiftAmount;
+		if (active) {
+			foreach (var stuckObject in stuckObjects) {
+				var magnetic = stuckObject.GetComponent<Magnetic>();
+				if(magnetic != null && !magnetic.active) {
+					continue;
+				}
+				stuckObject.transform.position = stuckObject.transform.position + shiftAmount;
+			}
 		}
 	}
 }
