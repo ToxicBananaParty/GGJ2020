@@ -30,6 +30,13 @@ public class ScrapMetalEater: MonoBehaviour {
 		}
 	}
 
+	void OnCollisionEnter2D(Collision2D collision) {
+		var player = collision.gameObject.GetComponent<Player>();
+		if(player != null) {
+			Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+		}
+	}
+
 	public float eatScrap(float eatAmount) {
 		if(scraps.Count == 0) {
 			return 0;
