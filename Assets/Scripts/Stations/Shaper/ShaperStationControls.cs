@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShaperStationControls: StationControls {
+    public GameObject moldedShapePrefab;
+
+    private GameObject moldingShape;
+
     // Start is called before the first frame update
     void Start() {
         //
