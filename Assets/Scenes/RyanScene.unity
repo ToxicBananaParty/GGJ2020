@@ -722,7 +722,9 @@ MonoBehaviour:
   timerText: {fileID: 1632112405}
   cashText: {fileID: 624755424}
   toPaint: {r: 0, g: 0, b: 0, a: 0}
+  assignedColor: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 1179148192684965171, guid: 34a697473c3030146a7a0abab8085b3f, type: 3}
+  inspectorPrefab: {fileID: 0}
 --- !u!4 &271502271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 137489905053844461, guid: d42bcef79b31a434d9bb911b497fb919,
@@ -1373,12 +1375,12 @@ PrefabInstance:
     - target: {fileID: 8801420015617247880, guid: 34a697473c3030146a7a0abab8085b3f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.64
+      value: -14.35
       objectReference: {fileID: 0}
     - target: {fileID: 8801420015617247880, guid: 34a697473c3030146a7a0abab8085b3f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.54
+      value: -3.35
       objectReference: {fileID: 0}
     - target: {fileID: 8801420015617247880, guid: 34a697473c3030146a7a0abab8085b3f,
         type: 3}
