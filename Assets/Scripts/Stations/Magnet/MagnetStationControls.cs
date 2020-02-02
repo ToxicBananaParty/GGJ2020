@@ -25,11 +25,15 @@ public class MagnetStationControls: StationControls {
 			if (Input.GetKey(playerControls.down)) {
 				magnetArm.moveDown();
 			}
+		}
+	}
 
-		    if (Input.GetKey(playerControls.secondaryAction)) //Toggle magnetism
-		    {
-		        magnetArm.magnet.active = !magnetArm.magnet.active;
-		    }
+	void Update() {
+		if(playerControls != null) {
+			//Toggle magnetism
+			if (Input.GetKeyDown(playerControls.secondaryAction)) {
+				magnetArm.magnet.active = !magnetArm.magnet.active;
+			}
 		}
 	}
 }
