@@ -33,6 +33,7 @@ public class Carryable : Interactable
         {
             carrying = false;
             theInteractor.gameObject.GetComponent<Player>().climbSpeed = 0.1f;
+            gameObject.GetComponent<Rigidbody2D>().mass = 1.0f;
             theInteractor.gameObject.GetComponent<Animator>().SetBool("carrying", false);
         }
     }
