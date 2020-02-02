@@ -25,8 +25,13 @@ public class GameManager : MonoBehaviour
         if (ControlScheme.numPlayers > 1)
             AddPlayer(player);
 
+        inspectorWarning = GameObject.Find("Inspector Alert");
+
         InvokeRepeating("SendInspector", 60, 500);
-        InvokeRepeating("InspectorWarning", 30, 500);
+        InvokeRepeating("InspectorWarning", 5, 500);
+
+        destination = new Vector2(-7, 15);
+        offScreenHome = new Vector2(-25, 15);
     }
 
     // Update is called once per frame
@@ -40,6 +45,33 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y))
         {
             AddPlayer(player);
+        }
+    }
+
+    private float alertTimer = 0.0f;
+    private bool endWarning = false;
+    void FixedUpdate()
+    {
+        if (warning)
+        {
+            alertTimer += Time.deltaTime / 2.5f;
+            inspectorWarning.transform.position = Vector2.Lerp(offScreenHome, destination, alertTimer);
+        }
+        if (inspectorWarning.transform.position.x == destination.x)
+        {
+            alertTimer = 0.0f;
+            warning = false;
+            endWarning = true;
+        }
+        if (endWarning && inspectorWarning.transform.position.x != offScreenHome.x)
+        {
+            Debug.Log("Sending back");
+            alertTimer += Time.deltaTime / 2.5f;
+            inspectorWarning.transform.position = Vector2.Lerp(destination, offScreenHome, alertTimer);
+        }
+        if (endWarning && inspectorWarning.transform.position.x == offScreenHome.x)
+        {
+            endWarning = false;
         }
     }
 
@@ -109,9 +141,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private GameObject inspectorWarning;
+    private Vector2 destination, offScreenHome;
+    private bool warning = false;
     void InspectorWarning()
     {
         //Alert player that an inspector will arrive in 30 seconds.
 
+        warning = true;
     }
 }
