@@ -8,7 +8,7 @@ using GameObject = UnityEngine.GameObject;
 public class GameManager : MonoBehaviour
 {
     public float timer = 0.0f;
-    public float cash = 0.0f;
+    public float cash = 500.0f;
     public float inspectionChance = 0.0f;
     public Text timerText;
     public Text cashText;
