@@ -311,6 +311,11 @@ PrefabInstance:
       propertyPath: playerControls
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -33223063061391111, guid: c45411e355ad92c4e8c962698221c262,
+        type: 3}
+      propertyPath: magnetArm
+      value: 
+      objectReference: {fileID: 294694460}
     - target: {fileID: 6833401681795197817, guid: c45411e355ad92c4e8c962698221c262,
         type: 3}
       propertyPath: stationControls
@@ -717,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871419b40956b4146a90d1d5d3113fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRobot: {fileID: 0}
 --- !u!114 &228400826
 MonoBehaviour:
   m_ObjectHideFlags: 0
