@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GameObject = UnityEngine.GameObject;
 
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour
     {
         //Start timer at level start
         timer = 600.0f;
+
+        if(ControlScheme.numPlayers > 1)
+            AddPlayer(player);
     }
 
     // Update is called once per frame

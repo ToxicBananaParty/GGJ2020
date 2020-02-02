@@ -8,6 +8,7 @@ public class PlayerControls : MonoBehaviour
     public Player player;
     public StationControls stationControls;
 
+    //Controls for first player if keyboard
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode up = KeyCode.W;
@@ -24,7 +25,7 @@ public class PlayerControls : MonoBehaviour
             player = GetComponent<Player>();
         }
 
-        if (GameObject.Find("Players").transform.childCount > 1)
+        if (ControlScheme.controlType == 1 && GameObject.Find("Players").transform.childCount > 1) //Controls for second player if keyboard
         {
             left = KeyCode.LeftArrow;
             right = KeyCode.RightArrow;
@@ -32,6 +33,8 @@ public class PlayerControls : MonoBehaviour
             down = KeyCode.DownArrow;
             jump = KeyCode.RightControl;
             interact = KeyCode.RightShift;
+            secondaryAction = KeyCode.Keypad1;
+            tertiaryAction = KeyCode.Keypad4;
         }
     }
 
@@ -58,14 +61,14 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(jump) && !climbingLadder) {
+        if ((Input.GetKeyDown(jump) && !climbingLadder) || (Input.GetButtonDown("YButton") && !climbingLadder)) {
             var rigidBody = player.GetComponent<Rigidbody2D>();
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, player.jumpVelocity);
             transform.rotation = Quaternion.identity;
         }
 		if (stationControls != null) {
             stationControls.updateControls();
-        } else if (Input.GetKeyDown(interact))
+        } else if (Input.GetKeyDown(interact) || Input.GetButtonDown("AButton"))
         {
             player.GetComponent<Interactor>().interact();
         }
@@ -89,22 +92,22 @@ public class PlayerControls : MonoBehaviour
 
 	public void Movement()
     {
-        if (Input.GetKey(left)) {
+        if (Input.GetKey(left) || (Input.GetAxis("StickHorizontal") < 0.0f)) {
             player.transform.position += new Vector3(-player.walkSpeed, 0, 0);
             player.GetComponent<SpriteRenderer>().flipX = false;
         }
-        if (Input.GetKey(right)) {
+        if (Input.GetKey(right) || (Input.GetAxis("StickHorizontal") > 0.0f)) {
             player.transform.position += new Vector3(player.walkSpeed, 0, 0);
             player.GetComponent<SpriteRenderer>().flipX = true;
         }
 
 		// climbing
 		if(player.canClimbLadder()) {
-            if (Input.GetKey(up)) {
+            if (Input.GetKey(up) || (Input.GetAxis("StickVertical") > 0.0f)) {
                 climbingLadder = true;
                 player.transform.position += new Vector3(0, player.climbSpeed, 0);
             }
-			if(Input.GetKey(down)) {
+			if(Input.GetKey(down) || (Input.GetAxis("StickVertical") < 0.0f)) {
                 player.transform.position += new Vector3(0, -player.climbSpeed, 0);
             }
             var magnetic = player.GetComponent<Magnetic>();
