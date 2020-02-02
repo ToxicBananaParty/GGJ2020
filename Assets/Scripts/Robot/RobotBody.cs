@@ -22,7 +22,11 @@ public class RobotBody: MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		//
+	}
 
+	public List<MoldableShape> getTouchingShapes() {
+		return touchingShapes;
 	}
 
 	public DamageCoverResult coverDamage(MoldableShape shape) {
