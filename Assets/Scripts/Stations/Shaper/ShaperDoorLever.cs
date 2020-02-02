@@ -15,7 +15,6 @@ public class ShaperDoorLever: Interactable {
 	}
 
 	public override bool canInteract(Interactor interactor) {
-		Debug.Log("can open door " + shaperMachine.canOpenDoor());
 		return shaperMachine.canOpenDoor();
 	}
 
