@@ -89,7 +89,9 @@ public class GameManager : MonoBehaviour
 
     void SetColor(GameObject robotPaintZone, Color color)
     {
-        robotPaintZone.GetComponent<Image>().color = color;
+		if(robotPaintZone != null) {
+            robotPaintZone.GetComponent<Image>().color = color;
+        }
     }
 
     void SendInspector()
