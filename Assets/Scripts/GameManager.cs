@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
         inspectorWarning = GameObject.Find("Inspector Alert");
 
         //InvokeRepeating("SendInspector", 60, 500);
-        //InvokeRepeating("InspectorWarning", 5, 500);
+        InvokeRepeating("InspectorWarning", 5, 500);
 
-        destination = new Vector2(-7, 15);
-        offScreenHome = new Vector2(-25, 15);
+        destination = new Vector2(-7, 20);
+        offScreenHome = new Vector2(-25, 20);
     }
 
     // Update is called once per frame
