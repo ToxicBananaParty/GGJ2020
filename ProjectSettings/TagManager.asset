@@ -9,6 +9,7 @@ TagManager:
   - Bottom
   - Magnet
   - Magnetic
+  - Controls
   layers:
   - Default
   - TransparentFX

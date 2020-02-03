@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
 
         destination = new Vector2(-7, 20);
         offScreenHome = new Vector2(-25, 20);
+
+        //Hide control menu
+        GameObject.Find("Canvas/ControlPanel").SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,6 +48,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y))
         {
             AddPlayer(player2Prefab);
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            GameObject.Find("Canvas").transform.Find("ControlPanel").gameObject.SetActive(!(GameObject.Find("Canvas").transform.Find("ControlPanel")).gameObject.activeSelf);
         }
     }
 
