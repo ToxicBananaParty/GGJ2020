@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
         //InvokeRepeating("SendInspector", 60, 500);
         InvokeRepeating("InspectorWarning", 5, 500);
 
-        destination = new Vector2(-7, 20);
-        offScreenHome = new Vector2(-25, 20);
+        destination = new Vector2(-7, 15);
+        offScreenHome = new Vector2(-25, 15);
 
         //Hide control menu
         GameObject.Find("Canvas/ControlPanel").SetActive(false);
